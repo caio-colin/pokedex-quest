@@ -1,6 +1,6 @@
 import { useFiltering } from "./UseFiltering"
 
-export const useConditionFiltering = (
+const useConditionFiltering = (
   nameSelectedOnPage,
   listPokemonsByType,
   fullList
@@ -41,3 +41,5 @@ export const useConditionFiltering = (
     conditionMapping.find((conditionObject) => conditionObject.condition)?.result || []
   )
 }
+
+export default useConditionFiltering

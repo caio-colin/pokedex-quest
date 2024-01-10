@@ -1,11 +1,4 @@
-import { useFiltering } from "./UseFiltering"
-
-import useConditionFiltering from "./useConditionFiltering"
-
-export { useFiltering }
-export default useConditionFiltering
-
-import { useConditionFiltering } from "./useConditionFiltering"
+import { useFiltering } from "./UseFiltering.jsx"
+import { useConditionFiltering } from "./useConditionFiltering.jsx"
 
 export { useFiltering, useConditionFiltering }
-

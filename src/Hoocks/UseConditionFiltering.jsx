@@ -1,6 +1,6 @@
 import { useFiltering } from "./UseFiltering"
 
-const useConditionFiltering = (
+export const useConditionFiltering = (
   nameSelectedOnPage,
   listPokemonsByType,
   fullList
@@ -42,4 +42,3 @@ const useConditionFiltering = (
   )
 }
 
-export default useConditionFiltering

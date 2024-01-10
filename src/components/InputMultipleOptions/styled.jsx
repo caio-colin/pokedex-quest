@@ -13,7 +13,7 @@ export const StyleMultipleOptions = styled.div`
       rgba(15, 15, 15, 0.2) 0px 9px 24px;
     position: absolute;
     width: 100%;
-    max-height: 12rem;
+    max-height: calc(1.5rem * 12); // O valor multiplicado é referente a quantidade intes a ser exibida
     overflow-y: auto;
   }
   li {

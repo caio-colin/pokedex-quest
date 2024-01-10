@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { InputSearch } from "../InputSearch"
-import { useConditionFiltering } from "../../Hoocks"
+import { useConditionFiltering } from "../../Hoocks/index.jsx"
 import { getPokemons } from "../../services/requestAPI"
 import { SelectFilterTypePokemon } from "../SelectFilterTypePokemon"
 

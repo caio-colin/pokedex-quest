@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import { StyleMultipleOptions } from "./styled"
 import { InputSearch } from "../InputSearch"
 import { getListPokemonsNames } from "../../services/requestAPI"
-import { useFiltering } from "../../Hoocks"
+import { useFiltering } from "../../Hoocks/index.jsx"
 
 export const InputMultipleOptions = ({ setPokemonSelected }) => {
   const [nameSelectedOnPage, setNameSelectedOnPage] = useState("")

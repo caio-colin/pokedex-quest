@@ -13,7 +13,9 @@ export const StyleMultipleOptions = styled.div`
       rgba(15, 15, 15, 0.2) 0px 9px 24px;
     position: absolute;
     width: 100%;
-    max-height: calc(1.5rem * 12); // O valor multiplicado é referente a quantidade intes a ser exibida
+    max-height: calc(
+      1.5rem * 12
+    ); // O valor multiplicado é referente a quantidade intes a ser exibida
     overflow-y: auto;
   }
   li {
@@ -27,10 +29,11 @@ export const StyleMultipleOptions = styled.div`
     background-color: rgba(0, 0, 0, 0.03);
     position: relative;
   }
+  ${({ $firstOptionActive }) => $firstOptionActive && "li:first-child"},
+  .selected,
   li:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
-  .selected,
   li:active {
     background-color: rgba(0, 0, 0, 0.2);
   }

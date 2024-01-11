@@ -9,16 +9,17 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
   const [listOfPokemonNames, setListOfPokemonNames] = useState([])
   const { getListFilteredByName } = useFiltering()
   const [itsOpen, setItsOpen] = useState(false)
-  const inputSetRef = useRef(null)
-  const selectedRef = useRef(null)
-  const selectedItem = useRef(null)
-  const inputValueRef = useRef(null)
+  const inputSetRef = useRef(null) // Função para alterar o valor do input
+  const selectedRef = useRef(null) // Para acompanhar o focus quando o item selecionado for alterado
+  const selectedItem = useRef(null) // Para mudar a lista filtrada sem alterar o estado
+  const inputValueRef = useRef(null) // Valor visual do input sem alterar o estado
   const [positionIndex, setPositionIndex] = useState(-1)
+  const firstOptionActive = positionIndex == -1 && !selectedRef.current
 
   const listPokemonNames = getListFilteredByName(
     listOfPokemonNames,
     selectedItem.current || nameSelectedOnPage
-  )
+  ).sort((a, b) => a.name.localeCompare(b.name)) // Ordena a lista de pokemons, e garantir que o pokemon selecionado no input seja sempre o primeiro
 
   useEffect(() => {
     ;(async () => {
@@ -26,17 +27,19 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
       setListOfPokemonNames(list)
     })()
   }, [])
+
   useEffect(() => {
-    const handleKeyDocument = (e) => {
-      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-        e.preventDefault()
-      }
+    if (listPokemonNames[positionIndex]) {
+      setInputValue(listPokemonNames[positionIndex].name)
     }
-    if (itsOpen) {
-      document.addEventListener("keydown", handleKeyDocument)
-    }
-    return () => document.removeEventListener("keydown", handleKeyDocument)
-  }, [itsOpen])
+    // const valueIsTrue = listPokemonNames.some(
+    //   (pokemon) => pokemon.name === inputValueRef.current
+    // )
+    // // Se oque tem no input corresponder a algum item da lista o focus vai para o item
+    // if (valueIsTrue) {
+    //   handleInputFocus()
+    // }
+  }, [positionIndex])
 
   useEffect(() => {
     if (selectedRef.current) {
@@ -49,16 +52,13 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
   useEffect(() => {
     selectedItem.current = null
 
+    resetPositionAndClearSelection()
+
     nameSelectedOnPage != "" ? setItsOpen(true) : setItsOpen(false)
   }, [nameSelectedOnPage])
 
-  useEffect(() => {
-    if (listPokemonNames[positionIndex]) {
-      setInputValue(listPokemonNames[positionIndex].name)
-    }
-  }, [positionIndex])
-
   const resetPositionAndClearSelection = () => setPositionIndex(-1)
+
   const handleInputBlur = () => {
     setItsOpen(false)
   }
@@ -72,7 +72,6 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
     setPositionIndex(position)
     setItsOpen(true)
   }
-
   const handleClick = (optionSelected) => {
     setPokemonSelected(optionSelected)
     resetPositionAndClearSelection()
@@ -87,31 +86,52 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
       focusedInput.blur()
     }
   }
+
+  const setOptionSelected = (optionSelected) => {
+    const inputValueIsValid = listPokemonNames.some(
+      (pokemon) => pokemon.name === inputValueRef.current
+    )
+    // Se inputValueIsValid for true é porq oque tem no input corresponder a algum item da lista e ja esta focado então o focus deve ir para o item seguinte
+    if (inputValueIsValid) {
+      const newPosition = listPokemonNames.findIndex(
+        (pokemon) => pokemon.name === inputValueRef.current
+      )
+
+      optionSelected === "ArrowDown"
+        ? setPositionIndex(newPosition + 1)
+        : setPositionIndex(newPosition - 1)
+    }
+  }
+
   const handleArrowDown = () => {
-    console.log(positionIndex)
     setPositionIndex((prevPositionIndex) =>
       prevPositionIndex < listPokemonNames.length - 1
         ? prevPositionIndex + 1
         : listPokemonNames.length - 1
     )
+    // Se firstOptionActive for true o focus vai estar no primeiro elemento, então quando o handleArrowDown for executado o focus vai para o segundo elemento
+    firstOptionActive && setPositionIndex(1)
+    setOptionSelected("ArrowDown")
   }
   const handleArrowUp = () => {
     setPositionIndex((prevPositionIndex) =>
       prevPositionIndex > 0 ? prevPositionIndex - 1 : 0
     )
+    setOptionSelected("ArrowUp")
   }
+
   const handleEnter = () => {
-    const firstPokemon = listPokemonNames[0].name
-    const valueIsTrue = listPokemonNames.some(
+    const inputValueIsValid = listPokemonNames.some(
       (pokemon) => pokemon.name === inputValueRef.current
     )
-    // Verifica se o valor do input esta na lista, se tiver vai fazer o fetch com o valor do input
-    if (valueIsTrue) {
+    const firstPokemon = listPokemonNames[0].name
+    if (inputValueIsValid) {
+      // Verifica se o valor do input esta na lista, se tiver vai fazer o fetch com o valor do input
       handleClick(inputValueRef.current)
       return
     }
 
-    if (listPokemonNames.length > 0 && positionIndex == -1) {
+    if (firstPokemon) {
       handleClick(firstPokemon)
     }
   }
@@ -126,8 +146,13 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
     if (listPokemonNames.length === 0) return
 
     const action = keyHandlers[e.key]
+
     if (action) {
       action()
+    }
+
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault()
     }
   }
 
@@ -143,7 +168,10 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
         refSetValue={inputSetRef}
         setNameSelectedOnPage={setNameSelectedOnPage}
       />
-      <StyleMultipleOptions $itsOpen={itsOpen && listPokemonNames.length > 0}>
+      <StyleMultipleOptions
+        $firstOptionActive={firstOptionActive}
+        $itsOpen={itsOpen && listPokemonNames.length > 0}
+      >
         <ul>
           {listPokemonNames.map((pokemon, index) => (
             <li

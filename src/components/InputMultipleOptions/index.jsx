@@ -21,6 +21,11 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
     selectedItem.current || nameSelectedOnPage
   ).sort((a, b) => a.name.localeCompare(b.name)) // Ordena a lista de pokemons, e garantir que o pokemon selecionado no input seja sempre o primeiro
 
+  const setInputValue = (str) => {
+    const value = str.charAt(0).toUpperCase() + str.slice(1)
+    inputSetRef.current(value)
+  }
+
   useEffect(() => {
     ;(async () => {
       const list = await getListPokemonsNames()
@@ -32,13 +37,6 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
     if (listPokemonNames[positionIndex]) {
       setInputValue(listPokemonNames[positionIndex].name)
     }
-    // const valueIsTrue = listPokemonNames.some(
-    //   (pokemon) => pokemon.name === inputValueRef.current
-    // )
-    // // Se oque tem no input corresponder a algum item da lista o focus vai para o item
-    // if (valueIsTrue) {
-    //   handleInputFocus()
-    // }
   }, [positionIndex])
 
   useEffect(() => {
@@ -62,13 +60,12 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
   const handleInputBlur = () => {
     setItsOpen(false)
   }
-  const setInputValue = (value) => {
-    inputSetRef.current(value)
-  }
+
   const handleInputFocus = () => {
     const position = listPokemonNames.findIndex(
-      (pokemon) => pokemon.name === inputValueRef.current
+      (pokemon) => pokemon.name === inputValueRef.current.toLowerCase()
     )
+
     setPositionIndex(position)
     setItsOpen(true)
   }
@@ -89,12 +86,12 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
 
   const setOptionSelected = (optionSelected) => {
     const inputValueIsValid = listPokemonNames.some(
-      (pokemon) => pokemon.name === inputValueRef.current
+      (pokemon) => pokemon.name === inputValueRef.current.toLowerCase()
     )
     // Se inputValueIsValid for true é porq oque tem no input corresponder a algum item da lista e ja esta focado então o focus deve ir para o item seguinte
     if (inputValueIsValid) {
       const newPosition = listPokemonNames.findIndex(
-        (pokemon) => pokemon.name === inputValueRef.current
+        (pokemon) => pokemon.name === inputValueRef.current.toLowerCase()
       )
 
       optionSelected === "ArrowDown"
@@ -122,12 +119,12 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
 
   const handleEnter = () => {
     const inputValueIsValid = listPokemonNames.some(
-      (pokemon) => pokemon.name === inputValueRef.current
+      (pokemon) => pokemon.name === inputValueRef.current.toLowerCase()
     )
     const firstPokemon = listPokemonNames[0].name
     if (inputValueIsValid) {
       // Verifica se o valor do input esta na lista, se tiver vai fazer o fetch com o valor do input
-      handleClick(inputValueRef.current)
+      handleClick(inputValueRef.current.toLowerCase())
       return
     }
 

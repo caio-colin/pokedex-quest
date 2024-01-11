@@ -62,10 +62,11 @@ export const SelectStyle = styled.div`
       gap: 0.2rem;
       background-color: rgba(0, 0, 0, 0.03);
     }
+    li.selected,
     li:hover {
       background-color: rgba(0, 0, 0, 0.1);
     }
-    li.selected,
+
     li:active {
       background-color: rgba(0, 0, 0, 0.2);
     }

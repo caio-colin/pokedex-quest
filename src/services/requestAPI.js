@@ -1,25 +1,28 @@
 export async function getPokemons(nameOrId) {
-  
   const listPokemonsNames = (nameOrId) => {
-    if (Array.isArray(nameOrId)) {
-      return nameOrId
-    } else {
-      const normalizeName = nameOrId
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .replace(/[^a-zA-Z0-9-]/g, "")
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        if (Array.isArray(nameOrId)) {
+          resolve(nameOrId)
+        } else {
+          const normalizeName = nameOrId
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase()
+            .replace(/[^a-zA-Z0-9-]/g, "")
 
-      return [
-        {
-          name: nameOrId,
-          url: `https://pokeapi.co/api/v2/pokemon/${normalizeName}/`,
-        },
-      ]
-    }
+          resolve([
+            {
+              name: nameOrId,
+              url: `https://pokeapi.co/api/v2/pokemon/${normalizeName}/`,
+            },
+          ])
+        }
+      }, 2000)
+    })
   }
 
-  const pokemonList = listPokemonsNames(nameOrId)
+  const pokemonList = await listPokemonsNames(nameOrId)
 
   try {
     const listPokemons = await Promise.all(

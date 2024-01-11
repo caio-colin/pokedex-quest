@@ -21,18 +21,6 @@ export const SelectFilter = ({
     }
   }, [selectedRef.current])
 
-  useEffect(() => {
-    const handleKeyDocument = (e) => {
-      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-        e.preventDefault()
-      }
-    }
-    if (isExpanded) {
-      document.addEventListener("keydown", handleKeyDocument)
-    }
-    return () => document.removeEventListener("keydown", handleKeyDocument)
-  }, [isExpanded])
-
   const resetPositionAndClearSelection = () => setPositionIndex(-1)
   const handleClick = (typeFilter) => {
     setIsExpanded(!isExpanded)
@@ -74,6 +62,10 @@ export const SelectFilter = ({
     const action = keyHandlers[e.key]
     if (action) {
       action()
+    }
+
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault()
     }
   }
   const handleClickSelected = () => {

@@ -16,7 +16,7 @@ export const InputStyle = styled.div`
 
   svg:active,
   svg:active {
-    transform: scale(1.10);
+    transform: scale(1.1);
   }
   label {
     display: flex;
@@ -33,6 +33,7 @@ export const InputStyle = styled.div`
       -moz-appearance: none; /* Ocultar o botão "X" padrao no Firefox */
       appearance: none;
     }
+
     /* Ocultar botão "X" padrao no navegadores versões mais recentes do Chrome e de outros navegadores baseados no Chromium */
     input[type="search"]::-webkit-search-cancel-button,
     input[type="search"]::-webkit-search-clear-button {
@@ -41,4 +42,37 @@ export const InputStyle = styled.div`
       display: none;
     }
   }
-`
+  & {
+    position: relative;
+  }
+  &::after {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.1);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    ${({ $timeSearch }) =>
+      $timeSearch
+        ? `animation: background-progress ${$timeSearch}ms forwards;`
+        : `animation: background-desprogress ${$timeSearch}ms forwards;`}
+    border-radius: 4px;
+    display: block;
+    position: absolute;
+  }
+  @keyframes background-desprogress {
+    from {
+      right: 0%;
+    }
+    to {
+      right: 100%;
+    }
+  }
+  @keyframes background-progress {
+    from {
+      right: 100%;
+    }
+    to {
+      right: 0%;
+    }
+  }
+  `

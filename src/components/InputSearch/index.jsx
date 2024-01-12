@@ -5,6 +5,7 @@ import { InputStyle } from "./styled.jsx"
 export const InputSearch = ({
   refValue,
   refSetValue,
+  timeSearch = false, // Valor em milisegundos para o tempo de pesquisa
   setNameSelectedOnPage,
   onFocus,
 }) => {
@@ -33,7 +34,7 @@ export const InputSearch = ({
     onFocus && onFocus()
   }
   return (
-    <InputStyle>
+    <InputStyle $timeSearch={timeSearch}>
       <label htmlFor="search">
         <SearchIcon size={32} />
         <input

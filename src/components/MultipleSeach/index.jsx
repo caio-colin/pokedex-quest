@@ -12,6 +12,7 @@ export const MultipleSeach = ({
   const [nameSelectedOnPage, setNameSelectedOnPage] = useState("")
   const [listPokemonsByType, setListPokemonsByType] = useState([])
   const timeOutId = useRef(null)
+  const [progressTime, setProgressTime] = useState(null)
   const resultFiltering = useConditionFiltering(
     nameSelectedOnPage,
     listPokemonsByType,
@@ -24,14 +25,19 @@ export const MultipleSeach = ({
     setFiltering(false)
     setListSearchFilter(filteredResult)
   }
-
   useEffect(() => {
     clearTimeout(timeOutId.current)
 
     timeOutId.current = setTimeout(() => {
-      nameSelectedOnPage !== "" || listPokemonsByType.length > 0
-        ? setListSeach(resultFiltering)
-        : setListSearchFilter(null)
+      nameSelectedOnPage !== "" && setProgressTime(1000)
+
+      setTimeout(() => {
+        nameSelectedOnPage !== "" || listPokemonsByType.length > 0
+          ? setListSeach(resultFiltering)
+          : setListSearchFilter(null)
+
+        setProgressTime(null)
+      }, 1000)
     }, 1000)
 
     return () => {
@@ -47,7 +53,10 @@ export const MultipleSeach = ({
 
   return (
     <>
-      <InputSearch setNameSelectedOnPage={setNameSelectedOnPage} />
+      <InputSearch
+        timeSearch={progressTime}
+        setNameSelectedOnPage={setNameSelectedOnPage}
+      />
       <SelectFilterTypePokemon setListPokemonsByType={setListPokemonsByType} />
     </>
   )

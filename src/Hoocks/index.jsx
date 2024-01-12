@@ -1,4 +1,2 @@
-import { useFiltering } from "./UseFiltering.jsx"
-import { useConditionFiltering } from "./UseConditionFiltering.jsx"
-
-export { useFiltering, useConditionFiltering }
+export * from "./UseFiltering.jsx"
+export * from "./UseConditionFiltering.jsx"

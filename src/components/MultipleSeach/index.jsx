@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { InputSearch } from "../InputSearch"
 import { useConditionFiltering } from "../../Hoocks/index.jsx"
 import { getPokemons } from "../../services/requestAPI"
@@ -11,25 +11,39 @@ export const MultipleSeach = ({
 }) => {
   const [nameSelectedOnPage, setNameSelectedOnPage] = useState("")
   const [listPokemonsByType, setListPokemonsByType] = useState([])
-
+  const timeOutId = useRef(null)
   const resultFiltering = useConditionFiltering(
     nameSelectedOnPage,
     listPokemonsByType,
     listNames
   )
 
-  useEffect(() => {
-    const setListSeach = async (list) => {
-      setFiltering(true)
-      const filteredResult = await getPokemons(list)
-      setFiltering(false)
-      setListSearchFilter(filteredResult)
-    }
+  const setListSeach = async (list) => {
+    setFiltering(true)
+    const filteredResult = await getPokemons(list)
+    setFiltering(false)
+    setListSearchFilter(filteredResult)
+  }
 
+  useEffect(() => {
+    clearTimeout(timeOutId.current)
+
+    timeOutId.current = setTimeout(() => {
+      nameSelectedOnPage !== "" || listPokemonsByType.length > 0
+        ? setListSeach(resultFiltering)
+        : setListSearchFilter(null)
+    }, 1000)
+
+    return () => {
+      clearTimeout(timeOutId.current)
+    }
+  }, [nameSelectedOnPage])
+
+  useEffect(() => {
     nameSelectedOnPage !== "" || listPokemonsByType.length > 0
       ? setListSeach(resultFiltering)
       : setListSearchFilter(null)
-  }, [nameSelectedOnPage, listPokemonsByType])
+  }, [listPokemonsByType])
 
   return (
     <>

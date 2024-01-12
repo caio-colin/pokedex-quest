@@ -2,7 +2,12 @@ import { useState, useImperativeHandle } from "react"
 import { SearchIcon, CloseIcon } from "../icons"
 import { InputStyle } from "./styled.jsx"
 
-export const InputSearch = ({ refValue, refSetValue, setNameSelectedOnPage, onFocus }) => {
+export const InputSearch = ({
+  refValue,
+  refSetValue,
+  setNameSelectedOnPage,
+  onFocus,
+}) => {
   const [inputValue, setInputValue] = useState("")
 
   useImperativeHandle(refSetValue, () => setInputValue)
@@ -13,6 +18,7 @@ export const InputSearch = ({ refValue, refSetValue, setNameSelectedOnPage, onFo
     const isEmptyValue = value == ""
 
     setNameSelectedOnPage && setNameSelectedOnPage(value.trim())
+
     setInputValue(value)
 
     if (isEmptyValue) {

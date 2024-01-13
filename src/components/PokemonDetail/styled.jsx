@@ -16,6 +16,24 @@ export const StyleCardPokemonDetails = styled.div`
   border-radius: 5px;
   padding: 1rem;
   background-color: ${({ $typeColor }) => typeColors[$typeColor]}; */
+  @media (max-width: 1024px) {
+    grid:
+      "info info" 24.7rem
+      "stats moves" 12.1rem
+      "type moves" 3.7rem
+      "abilities abilities" auto /
+      1fr 23.1rem; // 46,2
+
+    .info img {
+      margin: auto;
+    }
+  }
+  @media (max-width: 896px) {
+  }
+  @media (max-width: 640px) {
+  }
+  @media (max-width: 450px) {
+  }
   h4 {
     font-size: 0.83333125rem;
     margin-bottom: 0.5rem;

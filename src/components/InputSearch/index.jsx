@@ -38,7 +38,7 @@ export const InputSearch = ({
       <label htmlFor="search">
         <SearchIcon size={32} />
         <input
-          placeholder="Search pokemon"
+          placeholder="Search pokemon or id"
           type="search"
           id="search"
           value={inputValue}

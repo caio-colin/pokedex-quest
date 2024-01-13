@@ -3,6 +3,7 @@ import { typeColors } from "../../utils/typeColors"
 
 export const CardStyle = styled.li`
   overflow: hidden;
+  width: 10.8rem;
   text-align: center;
   position: relative;
   padding: 1rem;
@@ -15,7 +16,9 @@ export const CardStyle = styled.li`
   cursor: pointer;
   transition: transform ease-in-out 0.2s;
   position: relative;
-
+  @media (max-width: 450px) {
+    width: 15rem;
+  }
   &:hover {
     transform: scale(1.05);
   }
@@ -29,10 +32,11 @@ export const CardStyle = styled.li`
   & > :nth-child(2),
   /* & > .react-loading-skeleton:nth-child(2), */
   & > span:nth-child(2) .react-loading-skeleton {
-    margin: 1rem 0;
+    margin: 1rem auto;
     width: 8.8rem;
     height: 8.8rem;
     border-radius: 5px;
+    display: block;
   }
   h3 {
     text-transform: capitalize;

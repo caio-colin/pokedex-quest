@@ -11,6 +11,7 @@ export const MultipleSeach = ({
 }) => {
   const [nameSelectedOnPage, setNameSelectedOnPage] = useState("")
   const [listPokemonsByType, setListPokemonsByType] = useState([])
+  const isMounted = useRef(false)
   const timeOutId = useRef(null)
   const [progressTime, setProgressTime] = useState(null)
   const resultFiltering = useConditionFiltering(
@@ -25,20 +26,28 @@ export const MultipleSeach = ({
     setFiltering(false)
     setListSearchFilter(filteredResult)
   }
+
   useEffect(() => {
     clearTimeout(timeOutId.current)
 
-    timeOutId.current = setTimeout(() => {
-      nameSelectedOnPage !== "" && setProgressTime(1000)
+    if (isMounted.current) {
+      setFiltering(true)
+      timeOutId.current = setTimeout(() => {
+        // setFiltering(true) habilita o efeito de skeleton, para simbolizar uma busca
+        // setProgressTime, define tempo para o efeito de loading do input, sem o tempo o input não tem efeito
+        setProgressTime(500)
 
-      setTimeout(() => {
-        nameSelectedOnPage !== "" || listPokemonsByType.length > 0
-          ? setListSeach(resultFiltering)
-          : setListSearchFilter(null)
-
-        setProgressTime(null)
+        setTimeout(() => {
+          nameSelectedOnPage !== ""
+            ? setListSeach(resultFiltering)
+            : setListSearchFilter(null)
+          setFiltering(false)
+          setProgressTime(null)
+        }, 500)
       }, 1000)
-    }, 1000)
+    }
+
+    isMounted.current = true
 
     return () => {
       clearTimeout(timeOutId.current)
@@ -46,7 +55,7 @@ export const MultipleSeach = ({
   }, [nameSelectedOnPage])
 
   useEffect(() => {
-    nameSelectedOnPage !== "" || listPokemonsByType.length > 0
+    listPokemonsByType.length > 0
       ? setListSeach(resultFiltering)
       : setListSearchFilter(null)
   }, [listPokemonsByType])

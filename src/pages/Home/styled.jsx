@@ -31,9 +31,29 @@ export const HeaderStyle = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
 `
 export const FooterStyle = styled.footer`
   width: 100%;
   text-align: center;
   color: white;
+`
+export const StyleHomePage = styled.button`
+  border: 1px solid #ccc;
+  background-color: transparent;
+  outline: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+  height: 2rem;
+  width: 10rem;
+  cursor: pointer;
+  & svg {
+    transform: rotate(180deg);
+  }
 `

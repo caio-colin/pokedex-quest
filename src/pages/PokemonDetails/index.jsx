@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
-import { HeaderStyle, MainStyle, FooterStyle } from "../Home/styled.jsx"
+import { HeaderStyle, MainStyle, FooterStyle, StyleHomePage } from "../Home/styled.jsx"
 import { ButtonDefault } from "../../components/ButtonDefault/"
 import { getPokemons, getDecriptionsAbilities } from "../../services/requestAPI.js"
 import { InputMultipleOptions } from "../../components/InputMultipleOptions/"
 import { PokemonDetail } from "../../components/PokemonDetail/"
+import { IconArrow } from "../../components/icons/IconArrow.jsx"
 
 export const PokemonDetails = () => {
   const { nameOrId } = useParams()
@@ -22,7 +23,7 @@ export const PokemonDetails = () => {
       setPokemonToShow(pokemonWithDescription)
       navigate("../pokemon/" + nameId)
     }
-    
+
     pokemonSelected != "" ? getPokemon(pokemonSelected) : getPokemon(nameOrId)
   }, [pokemonSelected])
 
@@ -30,7 +31,11 @@ export const PokemonDetails = () => {
     <>
       <MainStyle>
         <HeaderStyle>
-          <Link to="/">{"<"} Home page</Link>
+          <Link to={!loading ? "/" : null}>
+            <StyleHomePage>
+              <IconArrow size={16} /> Home page
+            </StyleHomePage>
+          </Link>
           <InputMultipleOptions setPokemonSelected={setPokemonSelected} />
         </HeaderStyle>
         <PokemonDetail loading={loading} pokemonShow={pokemonToShow} />

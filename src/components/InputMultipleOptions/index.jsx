@@ -95,8 +95,12 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
       )
 
       optionSelected === "ArrowDown"
-        ? setPositionIndex(newPosition + 1)
-        : setPositionIndex(newPosition - 1)
+        ? setPositionIndex(
+            newPosition < listPokemonNames.length - 1
+              ? newPosition + 1
+              : listPokemonNames.length - 1
+          )
+        : setPositionIndex(newPosition > 0 ? newPosition - 1 : 0)
     }
   }
 

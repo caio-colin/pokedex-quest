@@ -5,6 +5,18 @@
       "src": "/.*",
       "dest": "/index.html",
       "status": 200
+    },
+    {
+      "src": "/.*\\.js",
+      "headers": {
+        "Content-Type": "application/javascript"
+      }
+    },
+    {
+      "src": "/.*\\.jsx",
+      "headers": {
+        "Content-Type": "text/javascript"
+      }
     }
   ]
 }

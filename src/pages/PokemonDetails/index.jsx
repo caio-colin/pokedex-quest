@@ -17,16 +17,20 @@ export const PokemonDetails = () => {
   useEffect(() => {
     const getPokemon = async (nameId) => {
       setLoading(true)
+
       const pokemon = await getPokemons(nameId)
       const pokemonWithDescription = await getDecriptionsAbilities(pokemon[0])
-      setLoading(false)
+
       setPokemonToShow(pokemonWithDescription)
+
+      pokemonWithDescription.length == 0 || setLoading(false)
       navigate("../pokemon/" + nameId)
     }
 
     pokemonSelected != "" ? getPokemon(pokemonSelected) : getPokemon(nameOrId)
   }, [pokemonSelected])
 
+  console.log(pokemonSelected)
   return (
     <>
       <MainStyle>

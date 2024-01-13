@@ -66,6 +66,10 @@ export async function getListPokemonsNames() {
 }
 
 export async function getDecriptionsAbilities(pokemon) {
+  if (Array.isArray(pokemon)) {
+    return pokemon
+  }
+
   try {
     for (const ability of pokemon.abilities) {
       const response = await fetch(ability.ability.url)

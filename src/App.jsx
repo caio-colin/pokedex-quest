@@ -4,9 +4,9 @@ import { AppRouter } from "./pages/Routers"
 function App() {
   return (
     <>
-      <PokemonsProvider>
+      {/* <PokemonsProvider> */}
         <AppRouter />
-      </PokemonsProvider>
+      {/* </PokemonsProvider> */}
     </>
   )
 }

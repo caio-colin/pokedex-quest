@@ -22,15 +22,22 @@ export const StyleCardPokemonDetails = styled.div`
       "stats moves" 12.1rem
       "type moves" 3.7rem
       "abilities abilities" auto /
-      1fr 23.1rem; // 46,2
+      22.6rem 22.6rem; // 46,2
 
     .info img {
       margin: auto;
     }
   }
   @media (max-width: 896px) {
+    grid-template-columns: repeat(2, 16.7rem);
   }
   @media (max-width: 640px) {
+    grid:
+      "info info" 24.7rem
+      "type type" 3.7rem
+      "stats moves" 12.1rem
+      "abilities abilities" auto /
+      13.784375rem 7.784375rem;
   }
   @media (max-width: 450px) {
   }

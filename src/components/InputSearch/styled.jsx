@@ -9,7 +9,11 @@ export const InputStyle = styled.div`
   border-radius: 5px;
   min-width: 15rem;
   @media (max-width: 640px) {
+    min-width: unset;
     width: 100%;
+  }
+  @media (max-width: 450px) {
+    width: 15rem;
   }
   svg {
     transition: transform ease-in-out 0.1s;

@@ -36,9 +36,9 @@ export const HeaderStyle = styled.header`
   @media (max-width: 640px) {
     flex-direction: column;
     // Padronizar o tamanho dos filhos do header
-    > * {
-      max-width: 22.6rem;
+    > div {
       width: 100%;
+      max-width: 22.6rem;
     }
   }
   @media (max-width: 450px) {

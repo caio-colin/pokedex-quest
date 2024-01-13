@@ -7,14 +7,8 @@ export const InputStyle = styled.div`
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 5px;
-  min-width: 15rem;
-  @media (max-width: 640px) {
-    min-width: unset;
-    width: 100%;
-  }
-  @media (max-width: 450px) {
-    width: 15rem;
-  }
+  width: 100%;
+  max-width: 15.25rem;
   svg {
     transition: transform ease-in-out 0.1s;
     padding: 0 calc(2rem / 4);

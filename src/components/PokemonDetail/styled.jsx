@@ -18,18 +18,22 @@ export const StyleCardPokemonDetails = styled.div`
   background-color: ${({ $typeColor }) => typeColors[$typeColor]}; */
   @media (max-width: 1024px) {
     grid:
-      "info info" 24.7rem
-      "stats moves" 12.1rem
-      "type moves" 3.7rem
-      "abilities abilities" auto /
-      22.6rem 22.6rem; // 46,2
+      "info stats moves" 12.1rem
+      "info type moves" 3.7rem
+      "info abilities abilities" auto /
+      22.246875rem 15.776875rem 11.47625rem;
 
     .info img {
       margin: auto;
     }
   }
   @media (max-width: 896px) {
-    grid-template-columns: repeat(2, 16.7rem);
+    grid:
+      "info info" 24.7rem
+      "type type " 3.7rem
+      "stats moves" 12.1rem
+      "abilities abilities" auto /
+      16.7rem 16.7rem;
   }
   @media (max-width: 640px) {
     grid:
@@ -37,9 +41,23 @@ export const StyleCardPokemonDetails = styled.div`
       "type type" 3.7rem
       "stats moves" 12.1rem
       "abilities abilities" auto /
-      13.784375rem 7.784375rem;
+      14.784375rem 6.815625rem;
   }
   @media (max-width: 450px) {
+    grid:
+      "info" auto
+      "type" 3.7rem
+      "stats" 12.1rem
+      "moves" 12.1rem
+      "abilities " auto /
+      19.45625rem;
+    section.info div + img {
+      width: 100%;
+      height: initial;
+    }
+  }
+  @media (max-width: 375px) {
+    grid-template-columns: 15rem;
   }
   h4 {
     font-size: 0.83333125rem;

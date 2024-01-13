@@ -7,9 +7,7 @@ export const SelectStyle = styled.div`
   text-align: center;
   width: 10rem;
   user-select: none;
-  @media (max-width: 640px) {
-    width: 100%;
-  }
+
   > div {
     display: flex;
     align-items: center;

@@ -26,13 +26,25 @@ export const MainStyle = styled.main`
     justify-self: flex-end;
     grid-area: button-cremate;
   }
+  @media (max-width: 640px) {
+    grid-template-areas:
+      "header header"
+      "main main"
+      "button-decrement button-decrement"
+      "button-cremate button-cremate";
+    button:nth-last-child(2) {
+      justify-self: unset;
+    }
+    button:last-child {
+      justify-self: unset;
+    }
+  }
 `
 export const HeaderStyle = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-
   @media (max-width: 640px) {
     flex-direction: column;
     // Padronizar o tamanho dos filhos do header
@@ -44,7 +56,13 @@ export const HeaderStyle = styled.header`
   @media (max-width: 450px) {
     // Padronizar o tamanho dos filhos do header
     > * {
-      max-width: 15rem;
+      max-width: 19.45625rem;
+    }
+    @media (max-width: 375px) {
+      // Padronizar o tamanho dos filhos do header
+      > * {
+        max-width: 15rem;
+      }
     }
   }
 `
@@ -60,10 +78,16 @@ export const StyleHomePage = styled.button`
   border-radius: 5px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 0.5rem;
   height: 2rem;
   gap: 0.5rem;
-
+  width: 100%;
   cursor: pointer;
+  @media (max-width: 640px) {
+    :nth-child(2) {
+      margin: auto;
+      // Os 16px é referente ao tamanho do icone que divide espaço com o botão
+      transform: translateX(-16px);
+    }
+  }
 `

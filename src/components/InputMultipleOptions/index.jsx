@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import { StyleMultipleOptions } from "./styled"
+import { StyleContainerInputMultipleOptions, StyleMultipleOptions } from "./styled"
 import { InputSearch } from "../InputSearch"
 import { getListPokemonsNames } from "../../services/requestAPI"
 import { useFiltering } from "../../Hoocks/index.jsx"
@@ -154,7 +154,7 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
   }
 
   return (
-    <div
+    <StyleContainerInputMultipleOptions
       onKeyDown={handleKey}
       onFocus={handleInputFocus}
       onBlur={handleInputBlur}
@@ -184,6 +184,6 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
           ))}
         </ul>
       </StyleMultipleOptions>
-    </div>
+    </StyleContainerInputMultipleOptions>
   )
 }

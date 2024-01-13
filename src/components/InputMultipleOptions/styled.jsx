@@ -1,5 +1,15 @@
 import styled from "styled-components"
 
+export const StyleContainerInputMultipleOptions = styled.div`
+  max-width: 15.25rem; // Valor de largura original do InputSearch (15.25rem)
+  width: 100%;
+  // InputSearch é o primeiro filho (first-child)
+  // Ele contem (max-width: 15.25rem), então removendo com unset posso controlar o tamanho do componente aqui
+  :first-child {
+    max-width: unset;
+  }
+`
+
 export const StyleMultipleOptions = styled.div`
   position: relative;
   z-index: 2;

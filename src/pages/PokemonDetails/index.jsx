@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
-import { HeaderStyle, MainStyle, FooterStyle, StyleHomePage } from "../Home/styled.jsx"
+import { HeaderStyle, MainStyle, FooterStyle, StyleHomePage } from "./styled.jsx"
 import { ButtonDefault } from "../../components/ButtonDefault/"
 import { getPokemons, getDecriptionsAbilities } from "../../services/requestAPI.js"
 import { InputMultipleOptions } from "../../components/InputMultipleOptions/"
 import { PokemonDetail } from "../../components/PokemonDetail/"
-import { IconArrow } from "../../components/icons/IconArrow.jsx"
+import { HouseIcon } from "../../components/icons"
 
 export const PokemonDetails = () => {
   const { nameOrId } = useParams()
@@ -33,7 +33,8 @@ export const PokemonDetails = () => {
         <HeaderStyle>
           <Link to={!loading ? "/" : null}>
             <StyleHomePage>
-              <IconArrow size={16} /> Home page
+              <HouseIcon size={16} />
+              <span>Home page</span>
             </StyleHomePage>
           </Link>
           <InputMultipleOptions setPokemonSelected={setPokemonSelected} />

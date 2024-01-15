@@ -28,7 +28,7 @@ export const PokemonDetails = () => {
       } catch (error) {
         console.error("Erro ao tentar pegar descrição:", error)
 
-        navigate("../Errors/NotFound")
+        navigate("../404")
       }
     }
 

@@ -9,7 +9,8 @@ import {
 } from "../../components/"
 
 export const Home = () => {
-  const [count, setCount] = useState(10)
+  const countSession = parseInt(sessionStorage.getItem("countSession"))
+  const [count, setCount] = useState(countSession || 10)
   const [loading, setLoading] = useState(true)
   const [filtering, setFiltering] = useState(false)
   const [fullList, setFullList] = useState([])
@@ -18,25 +19,37 @@ export const Home = () => {
   const prevCountRef = useRef(count)
   const isDisable = fullList.length == 0 || listSearchFilter || loading
 
+  const getNames = async () => {
+    const nameList = await getListPokemonsNames()
+    setFullList(nameList)
+
+    if (countSession) {
+      handleCountSession(nameList, countSession)
+      return
+    }
+    addPokemons(nameList)
+  }
+
+  const addPokemons = async (list) => {
+    setLoading(true)
+    const listSlieced = list.slice(count - 10, count)
+    const newList = await getPokemons(listSlieced)
+    setListToShow((prevList) => [...prevList, ...newList])
+    setLoading(false)
+  }
+
+  const removePokemons = () => {
+    setListToShow((prevList) => prevList.slice(0, count))
+  }
+  const handleCountSession = async (list, countSession) => {
+    setLoading(true)
+    const listSlieced = list.slice(0, countSession)
+    const newList = await getPokemons(listSlieced)
+    setListToShow(newList)
+    setLoading(false)
+  }
+  
   useEffect(() => {
-    const getNames = async () => {
-      const nameList = await getListPokemonsNames()
-      setFullList(nameList)
-      addPokemons(nameList)
-    }
-
-    const addPokemons = async (list) => {
-      setLoading(true)
-      const listSlieced = list.slice(count - 10, count)
-      const newList = await getPokemons(listSlieced)
-      setLoading(false)
-      setListToShow((prevList) => [...prevList, ...newList])
-    }
-
-    const removePokemons = () => {
-      setListToShow((prevList) => prevList.slice(0, count))
-    }
-
     if (prevCountRef.current > count) {
       removePokemons()
     } else {
@@ -44,6 +57,8 @@ export const Home = () => {
     }
 
     prevCountRef.current = count
+
+    sessionStorage.setItem("countSession", count)
   }, [count])
 
   return (

@@ -1,14 +1,15 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import { Home } from "./Home"
 import { PokemonDetails } from "./PokemonDetails"
+import { NotFound } from "./Errors/NotFound"
 
 export const AppRouter = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/pokemon/:nameOrId" element={<PokemonDetails />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/pokemon/:nameOrId" element={<PokemonDetails />} />
+      <Route path="/404" element={<NotFound />} />
+      <Route path="*" element={<Navigate to="/404" replace />} />
+    </Routes>
   )
 }

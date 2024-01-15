@@ -66,10 +66,6 @@ export async function getListPokemonsNames() {
 }
 
 export async function getDecriptionsAbilities(pokemon) {
-  if (Array.isArray(pokemon)) {
-    return pokemon
-  }
-
   try {
     for (const ability of pokemon.abilities) {
       const response = await fetch(ability.ability.url)
@@ -92,6 +88,7 @@ export async function getDecriptionsAbilities(pokemon) {
     return await pokemon
   } catch (error) {
     console.error("Erro ao tentar pegar descrição:", error)
+    throw error
   }
 }
 

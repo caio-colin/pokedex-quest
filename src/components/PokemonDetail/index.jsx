@@ -6,7 +6,7 @@ import { SkeletonPokemonDetail } from "./SkeletonPokemonDetail.jsx"
 
 export const PokemonDetail = ({ loading, pokemonShow }) => {
   return loading ? (
-    <SkeletonPokemonDetail pokemonShow={pokemonShow} />
+    <SkeletonPokemonDetail />
   ) : (
     <StyleCardPokemonDetails
       $loading={false}

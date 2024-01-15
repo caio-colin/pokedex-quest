@@ -17,20 +17,24 @@ export const PokemonDetails = () => {
   useEffect(() => {
     const getPokemon = async (nameId) => {
       setLoading(true)
-
       const pokemon = await getPokemons(nameId)
-      const pokemonWithDescription = await getDecriptionsAbilities(pokemon[0])
 
-      setPokemonToShow(pokemonWithDescription)
+      try {
+        const pokemonWithDescription = await getDecriptionsAbilities(pokemon[0])
 
-      pokemonWithDescription.length == 0 || setLoading(false)
-      navigate("../pokemon/" + nameId)
+        setPokemonToShow(pokemonWithDescription)
+        setLoading(false)
+        navigate("../pokemon/" + nameId)
+      } catch (error) {
+        console.error("Erro ao tentar pegar descrição:", error)
+
+        navigate("../Errors/NotFound")
+      }
     }
 
     pokemonSelected != "" ? getPokemon(pokemonSelected) : getPokemon(nameOrId)
   }, [pokemonSelected])
 
-  console.log(pokemonSelected)
   return (
     <>
       <MainStyle>

@@ -6,6 +6,21 @@ export const ContainerStyle = styled.ul`
   width: 58rem;
   justify-content: center;
   gap: 1rem;
+  .item-selected {
+    animation: selectAnimation ease-in-out 2s;
+    z-index: 1;
+  }
+  @keyframes selectAnimation {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
   @media (max-width: 1024px) {
     width: 51.499375rem; // (Item a ser exibido * 10.8rem) + (espaço entre eles * 1rem)
     li {

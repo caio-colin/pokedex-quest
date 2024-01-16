@@ -7,7 +7,7 @@ export const ContainerStyle = styled.ul`
   justify-content: center;
   gap: 1rem;
   .item-selected {
-    animation: selectAnimation ease-in-out 2s infinite;
+    animation: selectAnimation ease-in-out 2s;
     z-index: 1;
   }
   @keyframes selectAnimation {

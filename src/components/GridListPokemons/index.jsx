@@ -10,8 +10,26 @@ export const GridListPokemons = ({ children, loading, pokemonsList }) => {
   const pokemonNameSelected = JSON.parse(sessionStorage.getItem("pokemonSelected"))
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
+    const options = {
+      root: null, //Toda a viewport sera observada
+      rootMargin: "0px", // Distância da viewport em relação ao elemento
+      threshold: 0.1, // Quanto o elemento precisa esta visivel para ser observado
+    }
+
+    const callback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          handleIntersection()
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(callback, options)
+
+    // const timeoutId = setTimeout(() => {
       if (pokemonNameSelected && pokemonClick.current) {
+        observer.observe(pokemonClick.current)
+        // Scroll para o pokemon selecionado
         pokemonClick.current.scrollIntoView({
           behavior: "smooth",
           block: "center",
@@ -19,16 +37,15 @@ export const GridListPokemons = ({ children, loading, pokemonsList }) => {
         // Ao remover pokemonSelected do Storage garante que o Card perca a seleção ao relogar a pagina
         sessionStorage.removeItem("pokemonSelected")
       }
+    // }, 50)
 
-      // O Tempo tem que ser multiplo de 2 segundos(tempo da animacão definido no style) e diminuir o valor pelo tempo do setTimeout principal, no caso ai ta sendo 4 segundos menos 200ms do tempo do timeout principal
-      setTimeout(() => removeFocus(), 3800)
-    }, 200)
-
-    return () => clearTimeout(timeoutId)
+    return () => {
+      // clearTimeout(timeoutId)
+    }
   }, [loading])
 
-  const removeFocus = () => {
-    pokemonClick.current?.classList.remove("item-selected")
+  const handleIntersection = () => {
+    pokemonClick.current?.classList.add("item-selected")
   }
 
   const handleClick = (pokemonName) => {
@@ -51,7 +68,7 @@ export const GridListPokemons = ({ children, loading, pokemonsList }) => {
               key={pokemon.id}
               onClick={() => handleClick(pokemon.name)}
               ref={pokemon.name == pokemonNameSelected ? pokemonClick : null}
-              className={pokemon.name == pokemonNameSelected ? "item-selected" : null}
+              // className={pokemon.name == pokemonNameSelected ? "item-selected" : null}
             >
               <CardPokemon
                 key={pokemon.id}

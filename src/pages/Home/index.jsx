@@ -79,7 +79,7 @@ export const Home = () => {
         {listToShow.length > 0 ? (
           filtering ? (
             <GridListPokemons>
-              <SkeletonCardPokemon start={10} />
+              <SkeletonCardPokemon start={countSession || 10} />
             </GridListPokemons>
           ) : (
             <GridListPokemons

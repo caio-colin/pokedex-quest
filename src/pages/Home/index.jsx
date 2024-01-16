@@ -17,7 +17,7 @@ export const Home = () => {
   const [listToShow, setListToShow] = useState([])
   const [listSearchFilter, setListSearchFilter] = useState(null)
   const prevCountRef = useRef(count)
-  const isDisable = fullList.length == 0 || listSearchFilter || loading
+  const isDisable = fullList.length == 0 || listSearchFilter || filtering || loading
 
   const getNames = async () => {
     const nameList = await getListPokemonsNames()

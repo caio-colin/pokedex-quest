@@ -30,6 +30,20 @@ export const MultipleSeach = ({
   }
 
   useEffect(() => {
+    const savedList = () => {
+      sessionStorage.setItem("filterList", JSON.stringify(resultFiltering))
+    }
+
+    const removeList = () => {
+      if (isMounted.current) {
+        sessionStorage.removeItem("filterList")
+      }
+    }
+
+    resultFiltering.length > 0 ? savedList() : removeList()
+  }, [nameSelectedOnPage, listPokemonsByType])
+
+  useEffect(() => {
     clearTimeout(timeOutId.current)
 
     if (isMounted.current) {
@@ -61,14 +75,6 @@ export const MultipleSeach = ({
       ? setListSeach(resultFiltering)
       : setListSearchFilter(null)
   }, [listPokemonsByType])
-  useEffect(() => {
-    if (resultFiltering.length > 0) {
-      sessionStorage.setItem("filterList", JSON.stringify(resultFiltering))
-    }
-    if (isMounted.current && nameSelectedOnPage == "" && listPokemonsByType.length == 0) {
-      sessionStorage.removeItem("filterList")
-    }
-  }, [nameSelectedOnPage, listPokemonsByType])
 
   return (
     <>

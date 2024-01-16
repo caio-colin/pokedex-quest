@@ -23,11 +23,10 @@ export const Home = () => {
     const nameList = await getListPokemonsNames()
     setFullList(nameList)
 
-    if (countSession) {
+    if (!isNaN(countSession)) {
       handleCountSession(nameList, countSession)
       return
     }
-    addPokemons(nameList)
   }
 
   const addPokemons = async (list) => {
@@ -43,12 +42,14 @@ export const Home = () => {
   }
   const handleCountSession = async (list, countSession) => {
     setLoading(true)
+
     const listSlieced = list.slice(0, countSession)
     const newList = await getPokemons(listSlieced)
     setListToShow(newList)
+
     setLoading(false)
   }
-  
+
   useEffect(() => {
     if (prevCountRef.current > count) {
       removePokemons()

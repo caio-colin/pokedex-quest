@@ -7,18 +7,18 @@ export const ContainerStyle = styled.ul`
   justify-content: center;
   gap: 1rem;
   .item-selected {
-    animation: selectAnimation ease-in-out 2s;
+    animation: selectAnimation ease-in-out 1s infinite;
     z-index: 1;
   }
   @keyframes selectAnimation {
     0% {
-      opacity: 1;
+      transform: translateY(0rem);
     }
     50% {
-      opacity: 0.5;
+      transform: translateY(-1rem);
     }
     100% {
-      opacity: 1;
+      transform: translateY(0rem);
     }
   }
   @media (max-width: 1024px) {

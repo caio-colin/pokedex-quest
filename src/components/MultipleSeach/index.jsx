@@ -14,6 +14,7 @@ export const MultipleSeach = ({
   const isMounted = useRef(false)
   const timeOutId = useRef(null)
   const [progressTime, setProgressTime] = useState(null)
+
   const resultFiltering = useConditionFiltering(
     nameSelectedOnPage,
     listPokemonsByType,
@@ -23,8 +24,9 @@ export const MultipleSeach = ({
   const setListSeach = async (list) => {
     setFiltering(true)
     const filteredResult = await getPokemons(list)
-    setFiltering(false)
+
     setListSearchFilter(filteredResult)
+    setFiltering(false)
   }
 
   useEffect(() => {
@@ -59,6 +61,14 @@ export const MultipleSeach = ({
       ? setListSeach(resultFiltering)
       : setListSearchFilter(null)
   }, [listPokemonsByType])
+  useEffect(() => {
+    if (resultFiltering.length > 0) {
+      sessionStorage.setItem("filterList", JSON.stringify(resultFiltering))
+    }
+    if (isMounted.current && nameSelectedOnPage == "" && listPokemonsByType.length == 0) {
+      sessionStorage.removeItem("filterList")
+    }
+  }, [nameSelectedOnPage, listPokemonsByType])
 
   return (
     <>

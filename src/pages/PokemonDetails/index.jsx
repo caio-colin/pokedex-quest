@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import { HeaderStyle, MainStyle, FooterStyle, StyleHomePage } from "./styled.jsx"
-import { ButtonDefault } from "../../components/ButtonDefault/"
-import { getPokemons, getDecriptionsAbilities } from "../../services/requestAPI.js"
-import { InputMultipleOptions } from "../../components/InputMultipleOptions/"
-import { PokemonDetail } from "../../components/PokemonDetail/"
+import { ButtonDefault, PokemonDetail, InputMultipleOptions } from "../../components/"
 import { HouseIcon } from "../../components/icons"
+import { getPokemons, getDecriptionsAbilities } from "../../services/requestAPI.js"
 
 export const PokemonDetails = () => {
   const { nameOrId } = useParams()
@@ -42,7 +40,7 @@ export const PokemonDetails = () => {
           <Link to={!loading ? "/" : null}>
             <StyleHomePage>
               <HouseIcon size={16} />
-              <span>Home page</span>
+              <span>To go back</span>
             </StyleHomePage>
           </Link>
           <InputMultipleOptions setPokemonSelected={setPokemonSelected} />

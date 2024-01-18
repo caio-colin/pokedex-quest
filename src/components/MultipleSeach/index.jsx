@@ -9,8 +9,10 @@ export const MultipleSeach = ({
   setListSearchFilter = function () {},
   setFiltering = function () {},
 }) => {
+  const nameSession = JSON.parse(sessionStorage.getItem("nameSelectedOnPage"))
   const [nameSelectedOnPage, setNameSelectedOnPage] = useState("")
   const [listPokemonsByType, setListPokemonsByType] = useState([])
+  const [valueByFather, setValueByFather] = useState("")
   const isMounted = useRef(false)
   const timeOutId = useRef(null)
   const [progressTime, setProgressTime] = useState(null)
@@ -26,41 +28,37 @@ export const MultipleSeach = ({
     const filteredResult = await getPokemons(list)
 
     setListSearchFilter(filteredResult)
+
     setFiltering(false)
+  }
+  const runSearch = () => {
+    clearTimeout(timeOutId.current)
+
+    setFiltering(true)
+    timeOutId.current = setTimeout(() => {
+      // setFiltering(true) habilita o efeito de skeleton, para simbolizar uma busca
+      // setProgressTime, define tempo para o efeito de loading do input, se o tempo nao for definido o input não tem efeito
+      setProgressTime(500)
+
+      setTimeout(() => {
+        listPokemonsByType.length > 0 || nameSelectedOnPage !== ""
+          ? setListSeach(resultFiltering)
+          : setListSearchFilter(null)
+
+        setProgressTime(null)
+      }, 500)
+    }, 1000)
   }
 
   useEffect(() => {
-    const savedList = () => {
-      sessionStorage.setItem("filterList", JSON.stringify(resultFiltering))
+    if (nameSession) {
+      setValueByFather(nameSession)
     }
-
-    const removeList = () => {
-      if (isMounted.current) {
-        sessionStorage.removeItem("filterList")
-      }
-    }
-
-    resultFiltering.length > 0 ? savedList() : removeList()
-  }, [nameSelectedOnPage, listPokemonsByType])
+  }, [])
 
   useEffect(() => {
-    clearTimeout(timeOutId.current)
-
     if (isMounted.current) {
-      setFiltering(true)
-      timeOutId.current = setTimeout(() => {
-        // setFiltering(true) habilita o efeito de skeleton, para simbolizar uma busca
-        // setProgressTime, define tempo para o efeito de loading do input, sem o tempo o input não tem efeito
-        setProgressTime(500)
-
-        setTimeout(() => {
-          nameSelectedOnPage !== ""
-            ? setListSeach(resultFiltering)
-            : setListSearchFilter(null)
-          setFiltering(false)
-          setProgressTime(null)
-        }, 500)
-      }, 1000)
+      runSearch()
     }
 
     isMounted.current = true
@@ -68,17 +66,12 @@ export const MultipleSeach = ({
     return () => {
       clearTimeout(timeOutId.current)
     }
-  }, [nameSelectedOnPage])
-
-  useEffect(() => {
-    listPokemonsByType.length > 0
-      ? setListSeach(resultFiltering)
-      : setListSearchFilter(null)
-  }, [listPokemonsByType])
+  }, [nameSelectedOnPage, listPokemonsByType])
 
   return (
     <>
       <InputSearch
+        valueByFather={valueByFather}
         timeSearch={progressTime}
         setNameSelectedOnPage={setNameSelectedOnPage}
       />

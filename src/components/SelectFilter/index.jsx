@@ -5,6 +5,7 @@ import { SelectStyle } from "./styled"
 export const SelectFilter = ({
   list = [],
   value = "select",
+  valueByFather,
   setOptionSelectedOnPage = function () {},
 }) => {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -21,17 +22,28 @@ export const SelectFilter = ({
     }
   }, [selectedRef.current])
 
+  useEffect(() => {
+    if (valueByFather) {
+      handleValue(valueByFather)
+    }
+  }, [valueByFather])
+
+  const handleValue = (value) => {
+    setSelectedType(value)
+    setOptionSelectedOnPage(value)
+    sessionStorage.setItem("typeSelectedOnPage", JSON.stringify(value))
+  }
+
   const resetPositionAndClearSelection = () => setPositionIndex(-1)
+
   const handleClick = (typeFilter) => {
     setIsExpanded(!isExpanded)
-    setSelectedType(typeFilter)
-    setOptionSelectedOnPage(typeFilter)
+    handleValue(typeFilter)
   }
 
   const handleClear = () => {
     setIsExpanded(!isExpanded)
-    setSelectedType("")
-    setOptionSelectedOnPage("")
+    handleValue("")
   }
   const handleArrowDown = () => {
     setPositionIndex((prevPositionIndex) =>

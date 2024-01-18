@@ -27,16 +27,16 @@ export const GridListPokemons = ({ children, loading, pokemonsList }) => {
     const observer = new IntersectionObserver(callback, options)
 
     // const timeoutId = setTimeout(() => {
-      if (pokemonNameSelected && pokemonClick.current) {
-        observer.observe(pokemonClick.current)
-        // Scroll para o pokemon selecionado
-        pokemonClick.current.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        })
-        // Ao remover pokemonSelected do Storage garante que o Card perca a seleção ao relogar a pagina
-        sessionStorage.removeItem("pokemonSelected")
-      }
+    if (pokemonNameSelected && pokemonClick.current) {
+      observer.observe(pokemonClick.current)
+      // Scroll para o pokemon selecionado
+      pokemonClick.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      })
+      // Ao remover pokemonSelected do Storage garante que o Card perca a seleção ao relogar a pagina
+      sessionStorage.removeItem("pokemonSelected")
+    }
     // }, 50)
 
     return () => {
@@ -51,6 +51,10 @@ export const GridListPokemons = ({ children, loading, pokemonsList }) => {
   const handleClick = (pokemonName) => {
     // Guardar o nome do pokemon selecionado na sessionStorage
     sessionStorage.setItem("pokemonSelected", JSON.stringify(pokemonName))
+    
+    // Recupera o valor do contador quando o pokemon for selecionado
+    const countHome = parseInt(sessionStorage.getItem("countHome"))
+    sessionStorage.setItem("countSession", countHome)
   }
   return (
     <ContainerStyle>

@@ -83,6 +83,16 @@ export const StyleHomePage = styled.button`
   gap: 0.5rem;
   width: 100%;
   cursor: pointer;
+  &:hover {
+    fill: rgb(0, 191, 255);
+    color: rgb(0, 191, 255);
+    border-color: rgb(0, 191, 255);
+  }
+  &:active {
+    fill: #00bd10;
+    color: #00bd10;
+    border-color: #00bd10;
+  }
   @media (max-width: 640px) {
     :nth-child(2) {
       margin: auto;

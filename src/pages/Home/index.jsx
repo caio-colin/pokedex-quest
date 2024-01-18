@@ -10,24 +10,16 @@ import {
 
 export const Home = () => {
   const countSession = parseInt(sessionStorage.getItem("countSession"))
+  const namePokemonSession = JSON.parse(sessionStorage.getItem("nameSelectedOnPage"))
+  const typePokemonSession = JSON.parse(sessionStorage.getItem("typeSelectedOnPage"))
   const [count, setCount] = useState(countSession || 10)
   const [loading, setLoading] = useState(true)
   const [filtering, setFiltering] = useState(false)
-  const [fullList, setFullList] = useState([])
+  const [listName, setListName] = useState([])
   const [listToShow, setListToShow] = useState([])
   const [listSearchFilter, setListSearchFilter] = useState(null)
   const prevCountRef = useRef(count)
-  const isDisable = fullList.length == 0 || listSearchFilter || filtering || loading
-
-  const getNames = async () => {
-    const nameList = await getListPokemonsNames()
-    setFullList(nameList)
-
-    if (!isNaN(countSession)) {
-      handleCountSession(nameList, countSession)
-      return
-    }
-  }
+  const isDisable = listName.length == 0 || listSearchFilter || filtering || loading
 
   const addPokemons = async (list) => {
     setLoading(true)
@@ -37,38 +29,62 @@ export const Home = () => {
     setLoading(false)
   }
 
-  const removePokemons = () => {
-    setListToShow((prevList) => prevList.slice(0, count))
-  }
+  const removePokemons = () => setListToShow((prevList) => prevList.slice(0, count))
+
   const handleCountSession = async (list, countSession) => {
     setLoading(true)
-
     const listSlieced = list.slice(0, countSession)
     const newList = await getPokemons(listSlieced)
     setListToShow(newList)
-
     setLoading(false)
   }
 
   useEffect(() => {
+    sessionStorage.setItem("countHome", count)
+
     if (prevCountRef.current > count) {
       removePokemons()
-    } else {
-      fullList.length > 0 ? addPokemons(fullList) : getNames()
+    } else if (listName.length > 0) {
+      addPokemons(listName)
     }
 
     prevCountRef.current = count
-
-    sessionStorage.setItem("countSession", count)
   }, [count])
+
+  useEffect(() => {
+    const init = async () => {
+      if (countSession && listName.length == 0) {
+        const list = await getListPokemonsNames()
+        setListName(list)
+        handleCountSession(list, countSession)
+        sessionStorage.removeItem("countSession")
+      } else if (!countSession && listName.length == 0) {
+        const list = await getListPokemonsNames()
+        setListName(list)
+        addPokemons(list)
+      } else {
+        addPokemons(listName)
+      }
+    }
+
+    const teste = async () => {
+      if (listName.length == 0) {
+        const list = await getListPokemonsNames()
+        setListName(list)
+        setLoading(false)
+      }
+    }
+
+    namePokemonSession?.length > 0 || typePokemonSession?.length > 0 ? teste() : init()
+  }, [namePokemonSession, typePokemonSession])
 
   return (
     <>
       <MainStyle>
         <HeaderStyle>
-          {listToShow.length > 0 ? (
+          {listName.length > 0 ? (
             <MultipleSeach
-              listNames={fullList}
+              listNames={listName}
               setFiltering={setFiltering}
               setListSearchFilter={setListSearchFilter}
             />
@@ -76,10 +92,10 @@ export const Home = () => {
             <MultipleSeach key={2} />
           )}
         </HeaderStyle>
-        {listToShow.length > 0 ? (
+        {listName.length > 0 ? (
           filtering ? (
             <GridListPokemons>
-              <SkeletonCardPokemon start={countSession || 10} />
+              <SkeletonCardPokemon start={10} />
             </GridListPokemons>
           ) : (
             <GridListPokemons
@@ -92,7 +108,6 @@ export const Home = () => {
             <SkeletonCardPokemon start={10} />
           </GridListPokemons>
         )}
-
         <ButtonDefault
           value="show less"
           disabled={isDisable || count <= 10}
@@ -100,7 +115,7 @@ export const Home = () => {
         />
         <ButtonDefault
           value="show more"
-          disabled={isDisable || count >= fullList.length}
+          disabled={isDisable || count >= listName.length}
           onClick={() => setCount((prev) => prev + 10)}
         />
       </MainStyle>

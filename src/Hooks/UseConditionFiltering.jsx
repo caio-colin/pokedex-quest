@@ -3,8 +3,8 @@ import { useFiltering } from "./UseFiltering"
 export const useConditionFiltering = (
   nameSelectedOnPage,
   listPokemonsByType,
-  fullList
-  ) => {
+  listName
+) => {
   const { getListFilteredByName } = useFiltering()
   // A função getFilteredPokemonName garante que o filtro seja feito utilizando a propriedade "name", oq resolve o problema com o fato do pokemon ser pesquisado por ID e depois o usuário associar a atual pesquisa com o tipo de pokemon
   function getFilteredPokemonName() {
@@ -12,7 +12,7 @@ export const useConditionFiltering = (
       ? pokemonsSearchedByName[0].name
       : nameSelectedOnPage
   }
-  const pokemonsSearchedByName = getListFilteredByName(fullList, nameSelectedOnPage)
+  const pokemonsSearchedByName = getListFilteredByName(listName, nameSelectedOnPage)
   const pokemonsSearchedByNameAndType = getListFilteredByName(
     listPokemonsByType,
     getFilteredPokemonName()
@@ -41,4 +41,3 @@ export const useConditionFiltering = (
     conditionMapping.find((conditionObject) => conditionObject.condition)?.result || []
   )
 }
-

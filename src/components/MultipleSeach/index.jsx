@@ -41,9 +41,14 @@ export const MultipleSeach = ({
       setProgressTime(500)
 
       setTimeout(() => {
+        const handleFalse = () => {
+          setFiltering(false)
+          setListSearchFilter(null)
+        }
+
         listPokemonsByType.length > 0 || nameSelectedOnPage !== ""
           ? setListSeach(resultFiltering)
-          : setListSearchFilter(null)
+          : handleFalse()
 
         setProgressTime(null)
       }, 500)

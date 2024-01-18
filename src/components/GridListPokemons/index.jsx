@@ -26,7 +26,6 @@ export const GridListPokemons = ({ children, loading, pokemonsList }) => {
 
     const observer = new IntersectionObserver(callback, options)
 
-    // const timeoutId = setTimeout(() => {
     if (pokemonNameSelected && pokemonClick.current) {
       observer.observe(pokemonClick.current)
       // Scroll para o pokemon selecionado
@@ -37,12 +36,13 @@ export const GridListPokemons = ({ children, loading, pokemonsList }) => {
       // Ao remover pokemonSelected do Storage garante que o Card perca a seleção ao relogar a pagina
       sessionStorage.removeItem("pokemonSelected")
     }
-    // }, 50)
 
     return () => {
-      // clearTimeout(timeoutId)
+      if (pokemonClick.current) {
+        observer.unobserve(pokemonClick.current)
+      }
     }
-  }, [loading])
+  }, [loading, pokemonsList])
 
   const handleIntersection = () => {
     pokemonClick.current?.classList.add("item-selected")
@@ -51,7 +51,7 @@ export const GridListPokemons = ({ children, loading, pokemonsList }) => {
   const handleClick = (pokemonName) => {
     // Guardar o nome do pokemon selecionado na sessionStorage
     sessionStorage.setItem("pokemonSelected", JSON.stringify(pokemonName))
-    
+
     // Recupera o valor do contador quando o pokemon for selecionado
     const countHome = parseInt(sessionStorage.getItem("countHome"))
     sessionStorage.setItem("countSession", countHome)
@@ -72,7 +72,6 @@ export const GridListPokemons = ({ children, loading, pokemonsList }) => {
               key={pokemon.id}
               onClick={() => handleClick(pokemon.name)}
               ref={pokemon.name == pokemonNameSelected ? pokemonClick : null}
-              // className={pokemon.name == pokemonNameSelected ? "item-selected" : null}
             >
               <CardPokemon
                 key={pokemon.id}

@@ -9,7 +9,9 @@ import {
 } from "../../components/"
 
 export const Home = () => {
-  const countSession = parseInt(sessionStorage.getItem("countSession"))
+  const countSession = sessionStorage.getItem("countSession")
+    ? parseInt(sessionStorage.getItem("countSession"))
+    : null
   const namePokemonSession = JSON.parse(sessionStorage.getItem("nameSelectedOnPage"))
   const typePokemonSession = JSON.parse(sessionStorage.getItem("typeSelectedOnPage"))
   const [count, setCount] = useState(countSession || 10)
@@ -19,8 +21,25 @@ export const Home = () => {
   const [listToShow, setListToShow] = useState([])
   const [listSearchFilter, setListSearchFilter] = useState(null)
   const prevCountRef = useRef(count)
-  const isDisable = listName.length == 0 || listSearchFilter || filtering || loading
+  const isDisable =
+    listName.length == 0 ||
+    listToShow.length == 0 ||
+    listSearchFilter ||
+    filtering ||
+    loading
 
+  const startApp = async () => {
+    const list = await getAndSetList()
+    addPokemons(list)
+    setLoading(false)
+  }
+
+  const getAndSetList = async () => {
+    const list = await getListPokemonsNames()
+    setListName(list)
+    setLoading(false)
+    return list
+  }
   const addPokemons = async (list) => {
     setLoading(true)
     const listSlieced = list.slice(count - 10, count)
@@ -31,12 +50,11 @@ export const Home = () => {
 
   const removePokemons = () => setListToShow((prevList) => prevList.slice(0, count))
 
-  const handleCountSession = async (list, countSession) => {
-    setLoading(true)
+  const handleCountSession = async (countSession) => {
+    const list = await getAndSetList()
     const listSlieced = list.slice(0, countSession)
     const newList = await getPokemons(listSlieced)
     setListToShow(newList)
-    setLoading(false)
   }
 
   useEffect(() => {
@@ -52,32 +70,18 @@ export const Home = () => {
   }, [count])
 
   useEffect(() => {
-    const init = async () => {
-      if (countSession && listName.length == 0) {
-        const list = await getListPokemonsNames()
-        setListName(list)
-        handleCountSession(list, countSession)
-        sessionStorage.removeItem("countSession")
-      } else if (!countSession && listName.length == 0) {
-        const list = await getListPokemonsNames()
-        setListName(list)
-        addPokemons(list)
-      } else {
-        addPokemons(listName)
-      }
+    const hasSearchList = namePokemonSession?.length > 0 || typePokemonSession?.length > 0
+
+    if (hasSearchList) {
+      handleCountSession(countSession || 10)
+      return
+    } else if (countSession && !hasSearchList) {
+      handleCountSession(countSession)
+    } else {
+      startApp()
     }
-
-    const teste = async () => {
-      if (listName.length == 0) {
-        const list = await getListPokemonsNames()
-        setListName(list)
-        setLoading(false)
-      }
-    }
-
-    namePokemonSession?.length > 0 || typePokemonSession?.length > 0 ? teste() : init()
-  }, [namePokemonSession, typePokemonSession])
-
+  }, [])
+  
   return (
     <>
       <MainStyle>
@@ -92,7 +96,7 @@ export const Home = () => {
             <MultipleSeach key={2} />
           )}
         </HeaderStyle>
-        {listName.length > 0 ? (
+        {listSearchFilter?.length > 0 || listToShow.length > 0 ? (
           filtering ? (
             <GridListPokemons>
               <SkeletonCardPokemon start={10} />

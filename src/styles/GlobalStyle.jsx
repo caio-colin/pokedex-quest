@@ -17,9 +17,6 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 }
-html {
-  scrollbar-gutter: stable both-edges;
-}
 body {
   background-color: rgb(0,191,255);
 }

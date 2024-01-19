@@ -37,15 +37,14 @@ export const HeaderStyle = styled.header`
     flex-direction: column;
     // Padronizar o tamanho dos filhos do header
     > div {
-      width: 100%;
+      //max-width: 22.6rem; subscreve o valor dos elementos
       max-width: 22.6rem;
+      width: 100%;
     }
   }
   @media (max-width: 450px) {
     // Padronizar o tamanho dos filhos do header
-    > * {
-      max-width: 15rem;
-    }
+    max-width: 15rem;
   }
 `
 export const FooterStyle = styled.footer`

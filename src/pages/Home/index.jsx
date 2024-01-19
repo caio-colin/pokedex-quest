@@ -48,7 +48,28 @@ export const Home = () => {
     setLoading(false)
   }
 
-  const removePokemons = () => setListToShow((prevList) => prevList.slice(0, count))
+  const removePokemons = () => {
+    setListToShow((prevList) => prevList.slice(0, count))
+
+    // let counter = count
+
+    // console.log("Fora do Loop Counter:", counter)
+    // console.log("Fora do Loop Count:", count)
+
+    // const timeId = setInterval(() => {
+    //   counter--
+      
+    //   setListToShow((prevList) => prevList.slice(0, counter))
+
+    //   console.log("Dentro do Loop Counter:",counter)
+    //   console.log("Dentro do Loop Count:", count)
+
+    //   if (counter == count - 10) {
+    //     clearInterval(timeId)
+    //   }
+    // }, 500)
+    // setTimeout(() => setListToShow((prevList) => prevList.slice(0, counter)), 500)
+  }
 
   const handleCountSession = async (countSession) => {
     const list = await getAndSetList()
@@ -81,7 +102,7 @@ export const Home = () => {
       startApp()
     }
   }, [])
-  
+
   return (
     <>
       <MainStyle>

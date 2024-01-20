@@ -31,6 +31,11 @@ export const MultipleSeach = ({
 
     setFiltering(false)
   }
+  const removeFocus = () => {
+    if (document.activeElement) {
+      document.activeElement.blur()
+    }
+  }
   const runSearch = () => {
     clearTimeout(timeOutId.current)
 
@@ -39,7 +44,7 @@ export const MultipleSeach = ({
       // setFiltering(true) habilita o efeito de skeleton, para simbolizar uma busca
       // setProgressTime, define tempo para o efeito de loading do input, se o tempo nao for definido o input não tem efeito
       setProgressTime(500)
-
+      removeFocus()
       setTimeout(() => {
         const handleFalse = () => {
           setFiltering(false)

@@ -1,15 +1,15 @@
 import styled from "styled-components"
 import { typeColors } from "../../utils/typeColors"
 
-export const CardStyle = styled.div`
+export const CardStyleSkeleton = styled.div`
   overflow: hidden;
   width: 10.8rem;
   text-align: center;
   position: relative;
   padding: 1rem;
   border-radius: 10px;
-  animation: show-card-pokemon ease-in-out 0.5s;
   border: 1px solid ${({ type }) => typeColors[type] || "#ccc"};
+  animation: show-card-skeleton 500ms ease-in-out;
   background-color: ${({ type }) => typeColors[type] || "#fff"};
   box-shadow: 0rem 0.2rem 0.9rem -0.5rem rgba(0, 0, 0, 0.75);
   user-select: none;
@@ -25,11 +25,8 @@ export const CardStyle = styled.div`
   &:active {
     transform: translateY(-0.2rem) scale(1.05);
   }
-  img {
-    animation: show-image 1s ease-in-out;
-  }
-
   & > :nth-child(2),
+  /* & > .react-loading-skeleton:nth-child(2), */
   & > span:nth-child(2) .react-loading-skeleton {
     margin: 1rem auto;
     width: 8.8rem;
@@ -62,24 +59,17 @@ export const CardStyle = styled.div`
     display: flex;
     gap: 1rem;
   }
-  @keyframes show-image {
+
+  @keyframes show-card-skeleton {
     from {
       opacity: 0;
       transform: scale(0.5);
+      max-height: 0;
     }
     to {
       opacity: 1;
       transform: scale(1);
-    }
-  }
-  @keyframes show-card-pokemon {
-    from {
-      opacity: 0;
-      transform: scale(0.5);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
+      max-height: 20rem;
     }
   }
 `

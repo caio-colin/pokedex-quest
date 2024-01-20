@@ -1,16 +1,16 @@
 import styled from "styled-components"
 
-export const ContainerStyle = styled.ul`
+export const ContainerStyle = styled.section`
   display: flex;
   flex-wrap: wrap;
   width: 58rem;
   justify-content: center;
   gap: 1rem;
   .item-selected {
-    animation: selectAnimation ease-in-out 2s;
+    animation: select-animation ease-in-out 2s;
     z-index: 1;
   }
-  @keyframes selectAnimation {
+  @keyframes select-animation {
     0% {
       transform: translateY(0rem);
     }
@@ -23,8 +23,7 @@ export const ContainerStyle = styled.ul`
   }
   @media (max-width: 1024px) {
     width: 51.499375rem; // (Item a ser exibido * 10.8rem) + (espaço entre eles * 1rem)
-    li {
-      /* width: calc((51.499375rem / 4) - ( 3 * 1rem)); */
+    div {
       width: 12.12484375rem;
     }
   }
@@ -32,8 +31,7 @@ export const ContainerStyle = styled.ul`
     width: calc(
       (3 * 10.8rem) + (2 * 1rem)
     ); // (Item a ser exibido * 10.8rem) + (espaço entre eles * 1rem)
-    li {
-      /* width: calc((51.499375rem / 4) - ( 3 * 1rem)); */
+    div {
       width: 10.8rem;
     }
   }
@@ -44,12 +42,9 @@ export const ContainerStyle = styled.ul`
   }
   @media (max-width: 450px) {
     width: 15rem;
-    li {
+    div {
       /* width: calc((51.499375rem / 4) - ( 3 * 1rem)); */
       width: 15rem;
     }
   }
-`
-export const LiStyle = styled.li`
-  grid-column: 3;
 `

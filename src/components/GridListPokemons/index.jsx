@@ -1,9 +1,11 @@
 import { useEffect, useRef } from "react"
-import { ContainerStyle, LiStyle } from "./style"
+import { ContainerStyle } from "./style"
 import { CardPokemon } from "../CardPokemon"
 import { PokemonNotFound } from "../PokemonNotFound"
 import { Link } from "react-router-dom"
 import { SkeletonCardPokemon } from "../SkeletonCardPokemon"
+import "./transition.css"
+import { TransitionGroup, CSSTransition } from "react-transition-group"
 
 export const GridListPokemons = ({ children, loading, pokemonsList }) => {
   const pokemonClick = useRef(null)
@@ -61,27 +63,28 @@ export const GridListPokemons = ({ children, loading, pokemonsList }) => {
       {children ? (
         children
       ) : pokemonsList.length == 0 ? (
-        <LiStyle>
-          <PokemonNotFound />
-        </LiStyle>
+        <PokemonNotFound />
       ) : (
         <>
-          {pokemonsList.map((pokemon) => (
-            <Link
-              to={`/pokemon/${pokemon.name}`}
-              key={pokemon.id}
-              onClick={() => handleClick(pokemon.name)}
-              ref={pokemon.name == pokemonNameSelected ? pokemonClick : null}
-            >
-              <CardPokemon
-                key={pokemon.id}
-                id={pokemon.id}
-                sprites={pokemon.sprites}
-                name={pokemon.name}
-                types={pokemon.types}
-              />
-            </Link>
-          ))}
+          <TransitionGroup component={null}>
+            {pokemonsList.map((pokemon) => (
+              <CSSTransition key={pokemon.id} timeout={500} classNames="fade">
+                <Link
+                  to={`/pokemon/${pokemon.name}`}
+                  onClick={() => handleClick(pokemon.name)}
+                  ref={pokemon.name == pokemonNameSelected ? pokemonClick : null}
+                >
+                  <CardPokemon
+                    key={pokemon.id}
+                    id={pokemon.id}
+                    sprites={pokemon.sprites}
+                    name={pokemon.name}
+                    types={pokemon.types}
+                  />
+                </Link>
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
           {loading && <SkeletonCardPokemon start={10} />}
         </>
       )}

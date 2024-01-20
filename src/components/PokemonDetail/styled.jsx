@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { typeColors } from "../../utils/typeColors.js"
 
 export const StyleCardPokemonDetails = styled.div`
-  animation: show ease-in-out 1s;
+  animation: show ease-in-out 500ms;
   display: grid;
   grid:
     "info stats moves" 12.1rem
@@ -11,11 +11,6 @@ export const StyleCardPokemonDetails = styled.div`
     22.246875rem 15.776875rem 17.976875rem;
   gap: 1rem;
   text-transform: capitalize;
-  /* border: 1px solid #ccc;
-  box-shadow: 0rem 0rem 0.35rem -0.2rem rgba(0, 0, 0, 0.75);
-  border-radius: 5px;
-  padding: 1rem;
-  background-color: ${({ $typeColor }) => typeColors[$typeColor]}; */
   @media (max-width: 1024px) {
     grid:
       "info stats moves" 12.1rem
@@ -70,26 +65,7 @@ export const StyleCardPokemonDetails = styled.div`
     width: 21rem;
     height: 21rem;
   }
-
-  /* .stats {
-    background-color: rgba(255, 183, 0, 0.6);
-  }
-  .moves {
-    background-color: rgba(255, 238, 0, 0.6);
-  }
-  .type {
-    background-color: rgba(255, 119, 0, 0.6);
-  }
-  .abilities {
-    background-color: rgba(0, 255, 38, 0.6);
-  } */
   .box-shadown {
-    position: relative;
-    /* box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px,
-      rgba(15, 15, 15, 0.2) 0px 9px 24px; */
-    /* box-shadow: 0.2rem 0.2rem 0.35rem -0.2rem rgba(0, 0, 0, 0.75),
-      0rem 0rem 0.35rem -0.2rem rgba(0, 0, 0, 0.75); */
-    /* box-shadow: 0rem 0rem 0.35rem -0.2rem rgba(0, 0, 0, 0.75); */
     box-shadow: 0rem 0.2rem 0.9rem -0.5rem rgba(0, 0, 0, 0.75);
   }
   .info,
@@ -135,7 +111,6 @@ export const StyleCardPokemonDetails = styled.div`
       gap: 0.5rem;
       justify-content: center;
       align-items: center;
-
       li {
         padding: 0.3rem;
         border-radius: 3px;
@@ -144,6 +119,7 @@ export const StyleCardPokemonDetails = styled.div`
     }
   }
   .moves {
+    position: relative;
     grid-area: moves;
     padding-top: unset;
     padding-right: unset;

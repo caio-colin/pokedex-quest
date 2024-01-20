@@ -9,6 +9,10 @@ export const InputStyle = styled.div`
   border-radius: 5px;
   width: 100%;
   max-width: 15.25rem;
+  @media (max-width: 640px) {
+    width: 100%;
+    max-width: 100%;
+  }
   svg {
     transition: transform ease-in-out 0.1s;
     padding: 0 calc(2rem / 4);

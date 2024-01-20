@@ -67,16 +67,18 @@ export const SelectFilter = ({
     ArrowDown: () => handleArrowDown(),
     ArrowUp: () => handleArrowUp(),
     Enter: () => handleEnter(),
+    Space: () => handleEnter(),
+    Escape: () => setIsExpanded(false),
   }
   const handleKey = (e) => {
     if (list?.length === 0) return
 
-    const action = keyHandlers[e.key]
+    const action = keyHandlers[e.code]
     if (action) {
       action()
     }
 
-    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+    if (e.code === "ArrowDown" || e.code === "ArrowUp" || e.code === "Space") {
       e.preventDefault()
     }
   }

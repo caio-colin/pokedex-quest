@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 export const MainStyle = styled.main`
+  width: 60.1rem;
   padding: 1rem;
   border: 1px solid #ccc;
   box-shadow: 0rem 0rem 0.35rem rgba(0, 0, 0, 0.75);
@@ -26,27 +27,27 @@ export const MainStyle = styled.main`
     justify-self: flex-end;
     grid-area: button-cremate;
   }
-`
-export const HeaderStyle = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-
+  @media (max-width: 1024px) {
+    width: 53.499375rem; // (Item a ser exibido * 10.8rem) + (espaço entre eles * 1rem)
+  }
+  @media (max-width: 896px) {
+    width: 36.5rem;
+  }
   @media (max-width: 640px) {
-    flex-direction: column;
-    // Padronizar o tamanho dos filhos do header
-    > div {
-      //max-width: 22.6rem; subscreve o valor dos elementos
-      max-width: 22.6rem;
-      width: 100%;
-    }
+    width: 26rem; // (Item a ser exibido * 10.8rem) + (espaço entre eles * 1rem)
   }
   @media (max-width: 450px) {
-    // Padronizar o tamanho dos filhos do header
-    max-width: 15rem;
+    border-radius: unset;
+    border-radius: 0 0 5px 5px;
+    width: 100%;
+    & a {
+      width: 100%;
+      min-width: 15.25rem;
+    }
   }
 `
+export const HeaderStyle = styled.header``
+
 export const FooterStyle = styled.footer`
   width: 100%;
   text-align: center;

@@ -3,6 +3,7 @@ import { InputSearch } from "../InputSearch"
 import { useConditionFiltering } from "../../Hooks/index.jsx"
 import { getPokemons } from "../../services/requestAPI"
 import { SelectFilterTypePokemon } from "../SelectFilterTypePokemon"
+import { StyleContainerMultipleSearch } from "./styled.jsx"
 
 export const MultipleSeach = ({
   listNames = [],
@@ -79,13 +80,13 @@ export const MultipleSeach = ({
   }, [nameSelectedOnPage, listPokemonsByType])
 
   return (
-    <>
+    <StyleContainerMultipleSearch>
       <InputSearch
         valueByFather={valueByFather}
         timeSearch={progressTime}
         setNameSelectedOnPage={setNameSelectedOnPage}
       />
       <SelectFilterTypePokemon setListPokemonsByType={setListPokemonsByType} />
-    </>
+    </StyleContainerMultipleSearch>
   )
 }

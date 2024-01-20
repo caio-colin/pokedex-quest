@@ -28,6 +28,11 @@ body > div {
   min-height: 100vh;
   gap: 1rem;
   padding: 1rem;
+
+  @media (max-width: 450px) {
+    padding: unset;
+    padding-bottom: 1rem;
+  }
 }
 ::-webkit-scrollbar {
   width: 10px;

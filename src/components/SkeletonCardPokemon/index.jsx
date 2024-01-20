@@ -1,10 +1,10 @@
-import { CardStyleSkeleton } from "./styled"
+import { CardStyle } from "../CardPokemon/styled"
 import Skeleton from "react-loading-skeleton"
 import "react-loading-skeleton/dist/skeleton.css"
 
 export const SkeletonCardPokemon = ({ start = 10 }) => {
   return Array.from({ length: start }, (_, index) => (
-    <CardStyleSkeleton key={index}>
+    <CardStyle key={index} $skeletonAnimation={true}>
       <div>
         <Skeleton height={22.4} borderRadius={0} />
       </div>
@@ -18,6 +18,6 @@ export const SkeletonCardPokemon = ({ start = 10 }) => {
       <h3>
         <Skeleton height={18.4} />
       </h3>
-    </CardStyleSkeleton>
+    </CardStyle>
   ))
 }

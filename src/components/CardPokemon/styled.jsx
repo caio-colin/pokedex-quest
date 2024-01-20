@@ -2,13 +2,15 @@ import styled from "styled-components"
 import { typeColors } from "../../utils/typeColors"
 
 export const CardStyle = styled.div`
-  overflow: hidden;
   width: 10.8rem;
+  overflow: hidden;
   text-align: center;
   position: relative;
   padding: 1rem;
   border-radius: 10px;
-  animation: show-card-pokemon ease-in-out 0.5s;
+  animation: ${({ $skeletonAnimation }) =>
+      $skeletonAnimation ? "show-card-skeleton" : "show-card-pokemon"}
+    500ms ease-in-out;
   border: 1px solid ${({ type }) => typeColors[type] || "#ccc"};
   background-color: ${({ type }) => typeColors[type] || "#fff"};
   box-shadow: 0rem 0.2rem 0.9rem -0.5rem rgba(0, 0, 0, 0.75);
@@ -16,8 +18,14 @@ export const CardStyle = styled.div`
   cursor: pointer;
   transition: transform ease-in-out 0.2s;
   position: relative;
+  @media (max-width: 1024px) {
+    width: 12.09984375rem;
+  }
+  @media (max-width: 896px) {
+    width: 10.8rem;
+  }
   @media (max-width: 450px) {
-    width: 15rem;
+    width: calc(100%);
   }
   &:hover {
     transform: scale(1.05);
@@ -80,6 +88,18 @@ export const CardStyle = styled.div`
     to {
       opacity: 1;
       transform: scale(1);
+    }
+  }
+  @keyframes show-card-skeleton {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+      max-height: 0;
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+      max-height: 20rem;
     }
   }
 `

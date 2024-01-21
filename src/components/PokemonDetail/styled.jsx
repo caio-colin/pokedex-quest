@@ -44,15 +44,12 @@ export const StyleCardPokemonDetails = styled.div`
       "type" 3.7rem
       "stats" 12.1rem
       "moves" 12.1rem
-      "abilities " auto /
-      19.45625rem;
+      "abilities" auto /
+      minmax(17rem, 1fr);
     section.info div + img {
       width: 100%;
       height: initial;
     }
-  }
-  @media (max-width: 375px) {
-    grid-template-columns: 15rem;
   }
   h4 {
     font-size: 0.83333125rem;

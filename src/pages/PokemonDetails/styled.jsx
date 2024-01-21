@@ -39,6 +39,11 @@ export const MainStyle = styled.main`
       justify-self: unset;
     }
   }
+  @media (max-width: 450px) {
+    border-radius: unset;
+    border-radius: 0 0 5px 5px;
+    width: 100%;
+  }
 `
 export const HeaderStyle = styled.header`
   display: flex;
@@ -50,19 +55,7 @@ export const HeaderStyle = styled.header`
     // Padronizar o tamanho dos filhos do header
     > * {
       width: 100%;
-      max-width: 22.6rem;
-    }
-  }
-  @media (max-width: 450px) {
-    // Padronizar o tamanho dos filhos do header
-    > * {
-      max-width: 19.45625rem;
-    }
-    @media (max-width: 375px) {
-      // Padronizar o tamanho dos filhos do header
-      > * {
-        max-width: 15rem;
-      }
+      max-width: 100%;
     }
   }
 `

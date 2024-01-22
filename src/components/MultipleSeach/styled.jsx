@@ -5,6 +5,8 @@ export const StyleContainerMultipleSearch = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  position: sticky;
+  top: 0;
   @media (max-width: 640px) {
     flex-direction: column;
   }

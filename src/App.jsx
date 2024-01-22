@@ -1,13 +1,13 @@
-import { PokemonsProvider } from "./contexts/PokemonsContext"
+import { ThemeProvider } from "./contexts/ThemeContext"
 import { AppRouter } from "./routes/Routes"
 import { BrowserRouter } from "react-router-dom"
 
 function App() {
   return (
     <BrowserRouter>
-      <PokemonsProvider>
+      <ThemeProvider>
         <AppRouter />
-      </PokemonsProvider>
+      </ThemeProvider>
     </BrowserRouter>
   )
 }

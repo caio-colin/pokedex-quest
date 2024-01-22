@@ -4,6 +4,7 @@ import { useConditionFiltering } from "../../Hooks/index.jsx"
 import { getPokemons } from "../../services/requestAPI"
 import { SelectFilterTypePokemon } from "../SelectFilterTypePokemon"
 import { StyleContainerMultipleSearch } from "./styled.jsx"
+import { useInView } from "react-intersection-observer"
 
 export const MultipleSeach = ({
   listNames = [],
@@ -17,6 +18,11 @@ export const MultipleSeach = ({
   const isMounted = useRef(false)
   const timeOutId = useRef(null)
   const [progressTime, setProgressTime] = useState(null)
+  const [refView, inView] = useInView({
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+  })
 
   const resultFiltering = useConditionFiltering(
     nameSelectedOnPage,
@@ -80,7 +86,7 @@ export const MultipleSeach = ({
   }, [nameSelectedOnPage, listPokemonsByType])
 
   return (
-    <StyleContainerMultipleSearch>
+    <StyleContainerMultipleSearch $inView={!inView} ref={refView}>
       <InputSearch
         valueByFather={valueByFather}
         timeSearch={progressTime}

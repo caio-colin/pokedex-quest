@@ -1,4 +1,4 @@
-import { ThemeProvider } from "./contexts/ThemeContext"
+import { ThemeProvider } from "./contexts/theme-context"
 import { AppRouter } from "./routes/Routes"
 import { BrowserRouter } from "react-router-dom"
 

@@ -101,7 +101,7 @@ export const SelectFilter = ({
       <ul>
         <li onClick={handleClear}>
           <BroomIcon size={16} />
-          <span>to clean</span>
+          <span>clear option</span>
         </li>
         {list?.map((item, index) => (
           <li

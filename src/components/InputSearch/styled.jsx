@@ -37,6 +37,7 @@ export const InputStyle = styled.div`
       border: none;
       -moz-appearance: none; /* Ocultar o botão "X" padrao no Firefox */
       appearance: none;
+      background-color: transparent;
     }
 
     /* Ocultar botão "X" padrao no navegadores versões mais recentes do Chrome e de outros navegadores baseados no Chromium */

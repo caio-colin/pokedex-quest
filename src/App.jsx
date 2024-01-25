@@ -1,14 +1,15 @@
-import { ThemeProvider } from "./contexts/theme-context"
 import { AppRouter } from "./routes/Routes"
-import { BrowserRouter } from "react-router-dom"
+import { GlobalStyle } from "./styles/GlobalStyle"
+import { useThemeContext } from "./contexts/Theme/ThemeProvider.jsx"
 
 function App() {
+  const [theme] = useThemeContext()
+
   return (
-    <BrowserRouter>
-      <ThemeProvider>
-        <AppRouter />
-      </ThemeProvider>
-    </BrowserRouter>
+    <>
+      <AppRouter />
+      <GlobalStyle $theme={theme} />
+    </>
   )
 }
 

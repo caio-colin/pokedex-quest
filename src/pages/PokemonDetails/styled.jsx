@@ -2,9 +2,9 @@ import styled from "styled-components"
 
 export const MainStyle = styled.main`
   padding: 1rem;
-  border: 1px solid #ccc;
-  box-shadow: 0rem 0rem 0.35rem rgba(0, 0, 0, 0.75);
-  background-color: white;
+  border: 1px solid ${({ $theme }) => $theme.container.borderColor};
+  box-shadow: 0rem 0rem 0.35rem ${({ $theme }) => $theme.container.boxShadow};
+  background-color: ${({ $theme }) => $theme.container.backgroundColor};
   border-radius: 5px;
   display: grid;
   grid-template-areas:
@@ -50,12 +50,20 @@ export const HeaderStyle = styled.header`
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  > :nth-child(2) {
+    margin-right: auto;
+  }
+
   @media (max-width: 640px) {
     flex-direction: column;
     // Padronizar o tamanho dos filhos do header
+
     > * {
       width: 100%;
       max-width: 100%;
+    }
+    > :last-child {
+      width: 3rem;
     }
   }
 `
@@ -65,7 +73,10 @@ export const FooterStyle = styled.footer`
   color: white;
 `
 export const StyleHomePage = styled.button`
-  border: 1px solid #ccc;
+  transition: unset;
+  fill: ${({ $theme }) => $theme.container.textColor};
+  color: ${({ $theme }) => $theme.container.textColor};
+  border: 1px solid ${({ $theme }) => $theme.container.borderColor};
   background-color: transparent;
   outline: none;
   border-radius: 5px;
@@ -76,6 +87,10 @@ export const StyleHomePage = styled.button`
   gap: 0.5rem;
   width: 100%;
   cursor: pointer;
+  & > * {
+    transition: unset;
+  }
+
   &:hover {
     fill: rgb(0, 191, 255);
     color: rgb(0, 191, 255);

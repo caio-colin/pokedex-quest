@@ -3,12 +3,14 @@ import { StyleContainerInputMultipleOptions, StyleMultipleOptions } from "./styl
 import { InputSearch } from "../InputSearch"
 import { getListPokemonsNames } from "../../services/requestAPI"
 import { useFiltering } from "../../Hooks/index.jsx"
+import { useThemeContext } from "../../contexts/Theme/ThemeProvider.jsx"
 
 export const InputMultipleOptions = ({ setPokemonSelected }) => {
   const [nameSelectedOnPage, setNameSelectedOnPage] = useState("")
   const [listOfPokemonNames, setListOfPokemonNames] = useState([])
   const { getListFilteredByName } = useFiltering()
   const [itsOpen, setItsOpen] = useState(false)
+  const [theme] = useThemeContext()
   const inputSetRef = useRef(null) // Função para alterar o valor do input
   const selectedRef = useRef(null) // Para acompanhar o focus quando o item selecionado for alterado
   const selectedItem = useRef(null) // Para mudar a lista filtrada sem alterar o estado
@@ -170,6 +172,7 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
         setNameSelectedOnPage={setNameSelectedOnPage}
       />
       <StyleMultipleOptions
+        $theme={theme}
         $firstOptionActive={firstOptionActive}
         $itsOpen={itsOpen && listPokemonNames.length > 0}
       >

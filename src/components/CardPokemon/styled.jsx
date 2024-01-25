@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { typeColors } from "../../utils/typeColors"
 
 export const CardStyle = styled.div`
+  color: ${({ $theme }) => $theme.container.textColor};
   width: 10.8rem;
   overflow: hidden;
   text-align: center;
@@ -11,9 +12,11 @@ export const CardStyle = styled.div`
   animation: ${({ $skeletonAnimation }) =>
       $skeletonAnimation ? "show-card-skeleton" : "show-card-pokemon"}
     500ms ease-in-out;
-  border: 1px solid ${({ type }) => typeColors[type] || "#ccc"};
-  background-color: ${({ type }) => typeColors[type] || "#fff"};
-  box-shadow: 0rem 0.2rem 0.9rem -0.5rem rgba(0, 0, 0, 0.75);
+  border: 1px solid
+    ${({ type, $theme }) => typeColors[type] || $theme.skeletonCard.borderColor};
+  background-color: ${({ type, $theme }) =>
+    typeColors[type] || $theme.skeletonCard.backgroundColor};
+  box-shadow: 0rem 0.2rem 0.9rem -0.5rem ${({ $theme }) => $theme.container.boxShadow};
   user-select: none;
   cursor: pointer;
   transition: transform ease-in-out 0.2s;
@@ -54,7 +57,9 @@ export const CardStyle = styled.div`
     top: 0rem;
     left: 0rem;
     border-radius: 0 0 5px 0;
-    background-color: #fff;
+    transition: background-color ease-in-out 0.5s;
+    background-color: ${({ type, $theme }) =>
+      type ? $theme.container.backgroundColor : "transparent"};
     position: absolute;
     padding: 0.2rem 0.5rem;
     width: 40%;
@@ -104,6 +109,7 @@ export const CardStyle = styled.div`
   }
 `
 export const TypeStyle = styled.li`
+  color: ${({ $theme }) => $theme?.container?.textColor};
   background-color: ${({ type }) => typeColors[type] || "#fff"};
   border-radius: 2px;
   width: 5.4375rem;

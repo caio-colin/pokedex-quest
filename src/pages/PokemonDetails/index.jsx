@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import { HeaderStyle, MainStyle, FooterStyle, StyleHomePage } from "./styled.jsx"
-import { ButtonDefault, PokemonDetail, InputMultipleOptions } from "../../components/"
+import { ButtonDefault, PokemonDetail, InputMultipleOptions, ButtonToggleTheme } from "../../components/"
 import { HouseIcon } from "../../components/icons"
 import { getPokemons, getDecriptionsAbilities } from "../../services/requestAPI.js"
+import { useThemeContext } from "../../contexts/Theme/ThemeProvider.jsx"
 
 export const PokemonDetails = () => {
   const { nameOrId } = useParams()
@@ -11,6 +12,7 @@ export const PokemonDetails = () => {
   const [pokemonSelected, setPokemonSelected] = useState("")
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
+  const [theme] = useThemeContext()
 
   useEffect(() => {
     const getPokemon = async (nameId) => {
@@ -35,21 +37,24 @@ export const PokemonDetails = () => {
 
   return (
     <>
-      <MainStyle>
+      <MainStyle $theme={theme}>
         <HeaderStyle>
           <Link to={!loading ? "/" : null}>
-            <StyleHomePage>
+            <StyleHomePage $theme={theme}>
               <HouseIcon size={16} />
               <span>To go back</span>
             </StyleHomePage>
           </Link>
           <InputMultipleOptions setPokemonSelected={setPokemonSelected} />
+          <ButtonToggleTheme/>
         </HeaderStyle>
         <PokemonDetail loading={loading} pokemonShow={pokemonToShow} />
         <ButtonDefault value="previous pokemon" disabled onClick={function () {}} />
         <ButtonDefault value="next pokemon" disabled onClick={function () {}} />
       </MainStyle>
-      <FooterStyle>Pokédex &copy; 2023 - {new Date().getFullYear()}</FooterStyle>
+      <FooterStyle $theme={theme}>
+        Pokédex &copy; 2023 - {new Date().getFullYear()}
+      </FooterStyle>
     </>
   )
 }

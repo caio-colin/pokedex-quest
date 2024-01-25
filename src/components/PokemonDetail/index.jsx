@@ -3,12 +3,16 @@ import { StyleCardPokemonDetails } from "./styled"
 import { typeColors } from "../../utils/typeColors.js"
 import { PokemonImage } from "../PokemonImage/"
 import { SkeletonPokemonDetail } from "./SkeletonPokemonDetail.jsx"
+import { useThemeContext } from "../../contexts/Theme/ThemeProvider.jsx"
 
 export const PokemonDetail = ({ loading, pokemonShow }) => {
+  const [theme] = useThemeContext()
+
   return loading ? (
     <SkeletonPokemonDetail />
   ) : (
     <StyleCardPokemonDetails
+      $theme={theme}
       $loading={false}
       $typeColor={pokemonShow?.types[0].type.name}
     >

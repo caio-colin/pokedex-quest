@@ -26,14 +26,14 @@ export const colors = [
 export const StyleBorderProgressBar = styled.div`
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
-  border: 1px solid #ccc;
+  border: 1px solid ${({ $theme }) => $theme.container.borderColor};
   padding: 0.1rem;
   border-radius: 3px;
 `
 export const StyleProgresBar = styled.div`
   height: 100%;
   width: ${({ $value, $maxvalue }) => ($value * 100) / $maxvalue + "%"};
-  div{
+  div {
     height: 100%;
     border-radius: 3px;
     background-color: ${({ $value, $maxvalue }) => getColor($value, $maxvalue)};

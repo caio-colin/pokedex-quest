@@ -3,9 +3,9 @@ import styled from "styled-components"
 export const MainStyle = styled.main`
   width: 60.1rem;
   padding: 1rem;
-  border: 1px solid #ccc;
-  box-shadow: 0rem 0rem 0.35rem rgba(0, 0, 0, 0.75);
-  background-color: white;
+  border: 1px solid ${({ $theme }) => $theme.container.borderColor};
+  box-shadow: 0rem 0rem 0.35rem ${({ $theme }) => $theme.container.boxShadow};
+  background-color: ${({ $theme }) => $theme.container.backgroundColor};
   border-radius: 5px;
   display: grid;
   grid-template-areas:
@@ -46,24 +46,21 @@ export const MainStyle = styled.main`
     }
   }
 `
-export const HeaderStyle = styled.header``
+export const HeaderStyle = styled.header`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  @media (max-width: 640px) {
+    display: block;
+    > :last-child {
+      margin: 1rem auto 0;
+    }
+  }
+`
 
 export const FooterStyle = styled.footer`
   width: 100%;
   text-align: center;
   color: white;
-`
-export const StyleHomePage = styled.button`
-  border: 1px solid #ccc;
-  background-color: transparent;
-  outline: none;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 0.5rem;
-  height: 2rem;
-  gap: 0.5rem;
-
-  cursor: pointer;
 `

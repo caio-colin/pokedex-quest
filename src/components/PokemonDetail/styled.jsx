@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { typeColors } from "../../utils/typeColors.js"
 
 export const StyleCardPokemonDetails = styled.div`
+  color: ${({ $theme }) => ($theme.theme === "dark" ? "#ccc" : "#000")};
   animation: show ease-in-out 500ms;
   display: grid;
   grid:
@@ -63,7 +64,7 @@ export const StyleCardPokemonDetails = styled.div`
     height: 21rem;
   }
   .box-shadown {
-    box-shadow: 0rem 0.2rem 0.9rem -0.5rem rgba(0, 0, 0, 0.75);
+    box-shadow: 0rem 0.2rem 0.9rem -0.5rem ${({ $theme }) => $theme.container.boxShadow};
   }
   .info,
   .stats,
@@ -73,8 +74,8 @@ export const StyleCardPokemonDetails = styled.div`
     border-radius: 10px;
     padding: 0.5rem;
     font-weight: 500;
-    border: 1px solid #ccc;
-    background-color: white;
+    border: 1px solid ${({ $theme }) => $theme.container.borderColor};
+    background-color: ${({ $theme }) => $theme.container.backgroundColor};
   }
   .name-id {
     display: flex;
@@ -127,7 +128,7 @@ export const StyleCardPokemonDetails = styled.div`
     h4 {
       padding-top: 0.5rem;
       position: absolute;
-      background-color: white;
+      background-color: ${({ $theme }) => $theme.container.backgroundColor};
       width: calc(100% - 1.5rem);
     }
     ul {

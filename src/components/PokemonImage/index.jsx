@@ -3,9 +3,11 @@ import { noImageAvaliable } from "../../imgs/"
 import { ImgPokemonStyle } from "./styled"
 import Skeleton from "react-loading-skeleton"
 import "react-loading-skeleton/dist/skeleton.css"
+import { useThemeContext } from "../../contexts/Theme/ThemeProvider"
 
 export const PokemonImage = ({ name, sprite, width = 100, height = 100 }) => {
   const [loadingImg, setLoadingImg] = useState(true)
+  const [theme] = useThemeContext()
 
   const handleLoadImg = () => {
     setLoadingImg(false)
@@ -28,7 +30,7 @@ export const PokemonImage = ({ name, sprite, width = 100, height = 100 }) => {
           width={width}
           height={height}
           baseColor="transparent"
-          highlightColor="#ccc"
+          highlightColor={theme.skeletonCard.highlightColor}
         />
       )}
       <ImgPokemonStyle

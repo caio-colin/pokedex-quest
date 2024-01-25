@@ -7,6 +7,7 @@ export const StylePokemonNotFound = styled.div`
   flex-direction: column;
   gap: 1rem;
   text-transform: capitalize;
+  color: ${({ $theme }) => $theme.container.textColor};
   img {
     width: 10rem;
   }

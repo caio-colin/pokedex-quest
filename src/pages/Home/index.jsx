@@ -3,10 +3,13 @@ import { HeaderStyle, MainStyle, FooterStyle } from "./styled"
 import { getPokemons, getListPokemonsNames } from "../../services/requestAPI.js"
 import {
   ButtonDefault,
+  ButtonToggleTheme,
   SkeletonCardPokemon,
   GridListPokemons,
   MultipleSeach,
+  GoToTop,
 } from "../../components/"
+import { useThemeContext } from "../../contexts/Theme/ThemeProvider.jsx"
 
 export const Home = () => {
   const countSession = sessionStorage.getItem("countSession")
@@ -19,6 +22,7 @@ export const Home = () => {
   const [filtering, setFiltering] = useState(false)
   const [listName, setListName] = useState([])
   const [listToShow, setListToShow] = useState([])
+  const [theme] = useThemeContext()
   const [listSearchFilter, setListSearchFilter] = useState(null)
   const prevCountRef = useRef(count)
   const isDisable =
@@ -86,7 +90,7 @@ export const Home = () => {
 
   return (
     <>
-      <MainStyle>
+      <MainStyle $theme={theme}>
         <HeaderStyle>
           {listName.length > 0 ? (
             <MultipleSeach
@@ -97,6 +101,8 @@ export const Home = () => {
           ) : (
             <MultipleSeach key={2} />
           )}
+          <GoToTop />
+          <ButtonToggleTheme />
         </HeaderStyle>
         {listSearchFilter?.length > 0 || listToShow.length > 0 ? (
           filtering ? (
@@ -125,7 +131,9 @@ export const Home = () => {
           onClick={() => setCount((prev) => prev + 10)}
         />
       </MainStyle>
-      <FooterStyle>Pokédex &copy; 2023 - {new Date().getFullYear()}</FooterStyle>
+      <FooterStyle $theme={theme}>
+        Pokédex &copy; 2023 - {new Date().getFullYear()}
+      </FooterStyle>
     </>
   )
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import { IconArrow, BroomIcon } from "../icons"
 import { SelectStyle } from "./styled"
+import { useThemeContext } from "../../contexts/Theme/ThemeProvider.jsx"
 
 export const SelectFilter = ({
   list = [],
@@ -12,7 +13,17 @@ export const SelectFilter = ({
   const [selectedType, setSelectedType] = useState("")
   const optionSelected = selectedType || value
   const [positionIndex, setPositionIndex] = useState(-1)
+  const [theme] = useThemeContext()
   const selectedRef = useRef(null)
+  const firstOption = () => {
+    return (
+      <>
+        <BroomIcon size={16} />
+        <span>clear option</span>
+      </>
+    )
+  }
+  const optionsItens = [firstOption, ...list]
 
   useEffect(() => {
     if (selectedRef.current) {
@@ -47,7 +58,9 @@ export const SelectFilter = ({
   }
   const handleArrowDown = () => {
     setPositionIndex((prevPositionIndex) =>
-      positionIndex < list.length - 1 ? prevPositionIndex + 1 : list.length - 1
+      positionIndex < optionsItens.length - 1
+        ? prevPositionIndex + 1
+        : optionsItens.length - 1
     )
   }
   const handleArrowUp = () => {
@@ -56,11 +69,9 @@ export const SelectFilter = ({
     )
   }
   const handleEnter = () => {
-    const pokemonSelected = list[positionIndex]
+    const pokemonSelected = optionsItens[positionIndex]
 
-    if (pokemonSelected) {
-      handleClick(pokemonSelected)
-    }
+    typeof pokemonSelected === "string" ? handleClick(pokemonSelected) : handleClear()
   }
 
   const keyHandlers = {
@@ -89,6 +100,7 @@ export const SelectFilter = ({
 
   return (
     <SelectStyle
+      $theme={theme}
       className={isExpanded ? "expanded" : ""}
       tabIndex={0}
       onKeyDown={handleKey}
@@ -99,22 +111,21 @@ export const SelectFilter = ({
         <IconArrow size={16} />
       </div>
       <ul>
-        <li onClick={handleClear}>
-          <BroomIcon size={16} />
-          <span>clear option</span>
-        </li>
-        {list?.map((item, index) => (
-          <li
-            onMouseEnter={resetPositionAndClearSelection}
-            key={`${item} - ${index}`}
-            ref={positionIndex === index ? selectedRef : null}
-            className={positionIndex === index ? "selected" : ""}
-            onClick={() => handleClick(item)}
-            id={item}
-          >
-            {item}
-          </li>
-        ))}
+        {list &&
+          optionsItens.map((item, index) => (
+            <li
+              onMouseEnter={resetPositionAndClearSelection}
+              key={`${typeof item === "function" ? "first-option" : item} - ${index}`}
+              ref={positionIndex === index ? selectedRef : null}
+              className={positionIndex === index ? "selected" : ""}
+              onClick={() =>
+                typeof item === "function" ? handleClear() : handleClick(item)
+              }
+              id={typeof item === "function" ? "first-option" : item}
+            >
+              {typeof item === "function" ? item() : item}
+            </li>
+          ))}
       </ul>
     </SelectStyle>
   )

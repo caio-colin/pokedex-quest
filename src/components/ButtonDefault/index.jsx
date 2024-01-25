@@ -1,5 +1,12 @@
+import { useThemeContext } from "../../contexts/Theme/ThemeProvider.jsx"
 import { ButtonStyle } from "./styled"
 
 export const ButtonDefault = (props) => {
-  return <ButtonStyle {...props}>{props.value}</ButtonStyle>
+  const [theme] = useThemeContext()
+
+  return (
+    <ButtonStyle $theme={theme} {...props}>
+      {props.value}
+    </ButtonStyle>
+  )
 }

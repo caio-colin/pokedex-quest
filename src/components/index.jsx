@@ -1,5 +1,7 @@
 export * from "./ButtonDefault"
+export * from "./ButtonToggleTheme"
 export * from "./CardPokemon"
+export * from "./GoToTop"
 export * from "./GridListPokemons"
 export * from "./InputMultipleOptions"
 export * from "./InputSearch"

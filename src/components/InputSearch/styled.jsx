@@ -5,7 +5,7 @@ export const InputStyle = styled.div`
   display: flex;
   overflow: hidden;
   align-items: center;
-  border: 1px solid #ccc;
+  border: 1px solid ${({ $theme }) => $theme.container.borderColor};
   border-radius: 5px;
   width: 100%;
   max-width: 15.25rem;
@@ -17,6 +17,7 @@ export const InputStyle = styled.div`
     transition: transform ease-in-out 0.1s;
     padding: 0 calc(2rem / 4);
     cursor: pointer;
+    fill: ${({ $theme }) => $theme.input.textColor};
   }
 
   svg:active,
@@ -27,10 +28,14 @@ export const InputStyle = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
+    input[type="search"]::placeholder {
+      color: ${({ $theme }) => $theme.input.placeholderColor};
+    }
     input[type="search"]:focus::placeholder {
       color: transparent;
     }
     input[type="search"] {
+      color: ${({ $theme }) => $theme.input.textColor};
       padding: 0 0.5rem;
       width: 100%;
       outline: none;
@@ -53,7 +58,7 @@ export const InputStyle = styled.div`
   }
   &::after {
     content: "";
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: ${({ $theme }) => $theme.input.animationColor};
     top: 0;
     bottom: 0;
     left: 0;

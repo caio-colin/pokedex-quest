@@ -4,6 +4,7 @@ import { useConditionFiltering } from "../../Hooks/index.jsx"
 import { getPokemons } from "../../services/requestAPI"
 import { SelectFilterTypePokemon } from "../SelectFilterTypePokemon"
 import { StyleContainerMultipleSearch } from "./styled.jsx"
+import { useThemeContext } from "../../contexts/Theme/ThemeProvider.jsx"
 
 export const MultipleSeach = ({
   listNames = [],
@@ -20,6 +21,7 @@ export const MultipleSeach = ({
   const elementObserved = useRef(null)
   const timeOutId = useRef(null)
   const [progressTime, setProgressTime] = useState(null)
+  const [theme] = useThemeContext()
 
   const resultFiltering = useConditionFiltering(
     nameSelectedOnPage,
@@ -32,7 +34,10 @@ export const MultipleSeach = ({
     const filteredResult = await getPokemons(list)
 
     setListSearchFilter(filteredResult)
-    window.scrollTo(0, 0)
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
     setFiltering(false)
   }
   const removeFocus = () => {
@@ -51,7 +56,10 @@ export const MultipleSeach = ({
       removeFocus()
       setTimeout(() => {
         const handleFalse = () => {
-          window.scrollTo(0, 0)
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          })
           setFiltering(false)
           setListSearchFilter(null)
         }
@@ -113,6 +121,7 @@ export const MultipleSeach = ({
   return (
     <>
       <StyleContainerMultipleSearch
+        $theme={theme}
         $widthParent={widthParent}
         $isElementAboveViewport={isElementAboveViewport}
       >

@@ -8,7 +8,7 @@ export const StyleNotFound = styled.main`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  box-shadow: 0rem 0.2rem 0.9rem -0.5rem rgba(0, 0, 0, 0.75);
+  box-shadow: 0rem 0.2rem 0.9rem -0.5rem ${({ $theme }) => $theme.container.boxShadow};
 
   .container {
     text-align: center;
@@ -35,7 +35,7 @@ export const StyleNotFound = styled.main`
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid ${({ $theme }) => $theme.container.borderColor};
   }
 
   a:hover {

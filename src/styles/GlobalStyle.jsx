@@ -17,9 +17,15 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 }
-body {
-  background-color: rgb(0,191,255);
+html body *{
+  transition: background-color ease-in-out 0.5s, color ease-in-out 0.1s;
 }
+body {
+  background-color: ${({ $theme }) => $theme.body.backgroundColor};
+  transition: background-color ease-in-out 0.5s
+  
+}
+
 body > div {
   display: flex;
   flex-direction: column;

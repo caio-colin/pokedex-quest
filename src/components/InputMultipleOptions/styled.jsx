@@ -11,14 +11,19 @@ export const StyleContainerInputMultipleOptions = styled.div`
 `
 
 export const StyleMultipleOptions = styled.div`
+  color: ${({ $theme }) => $theme.container.textColor};
   position: relative;
   z-index: 2;
   display: ${({ $itsOpen }) => ($itsOpen > 0 ? "block" : "none")};
   user-select: none;
+  &,
+  ul > * {
+    transition: color ease-in-out 0.1s;
+  }
   ul {
     top: 0.2rem;
     border-radius: 5px;
-    background-color: white;
+    background-color: ${({ $theme }) => $theme.container.backgroundColor};
     box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px,
       rgba(15, 15, 15, 0.2) 0px 9px 24px;
     position: absolute;
@@ -36,16 +41,19 @@ export const StyleMultipleOptions = styled.div`
     text-transform: capitalize;
     padding: 0.2rem 0.5rem;
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.03);
+    background-color: ${({ $theme }) =>
+      $theme.theme === "light" ? "rgba(0, 0, 0, 0.03)" : "rgba(255, 255, 255, 0.03)"};
     position: relative;
   }
   ${({ $firstOptionActive }) => $firstOptionActive && "li:first-child"},
   .selected,
   li:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: ${({ $theme }) =>
+      $theme.theme === "light" ? "rgba(0, 0, 0, 0.1)" : "rgba(255, 255, 255, 0.1)"};
   }
   li:active {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: ${({ $theme }) =>
+      $theme.theme === "light" ? "rgba(0, 0, 0, 0.2)" : "rgba(255, 255, 255, 0.2)"};
   }
   li span:nth-child(1) {
     width: 3.8rem;

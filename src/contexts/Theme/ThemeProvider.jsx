@@ -1,4 +1,5 @@
 import { createContext, useState, useContext } from "react"
+import { themes } from "../../styles/theme"
 
 const ThemeContext = createContext()
 
@@ -11,12 +12,9 @@ export const useThemeContext = () => {
 }
 
 export const ThemeProvider = ({ children }) => {
-  const [fullList, setFullList] = useState([])
+  const [theme, setTheme] = useState(themes.light)
 
-  const value = {
-    fullList,
-    setFullList,
-  }
+  const value = [theme, setTheme]
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }

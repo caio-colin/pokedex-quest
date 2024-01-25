@@ -2,6 +2,7 @@ import { useState, useImperativeHandle, useEffect } from "react"
 import { SearchIcon, CloseIcon } from "../icons"
 import { InputStyle } from "./styled.jsx"
 import { useLocation } from "react-router-dom"
+import { useThemeContext } from "../../contexts/Theme/ThemeProvider.jsx"
 
 export const InputSearch = ({
   refValue,
@@ -13,7 +14,7 @@ export const InputSearch = ({
 }) => {
   const [inputValue, setInputValue] = useState("")
   const { pathname } = useLocation()
-
+  const [theme] = useThemeContext()
   useImperativeHandle(refSetValue, () => setInputValue)
   useImperativeHandle(refValue, () => inputValue)
 
@@ -64,7 +65,7 @@ export const InputSearch = ({
     onFocus && onFocus()
   }
   return (
-    <InputStyle $timeSearch={timeSearch}>
+    <InputStyle $theme={theme} $timeSearch={timeSearch}>
       <label htmlFor="search">
         <SearchIcon size={32} />
         <input

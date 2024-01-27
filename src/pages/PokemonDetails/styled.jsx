@@ -10,7 +10,7 @@ export const MainStyle = styled.main`
   grid-template-areas:
     "header header"
     "main main"
-    "button-decrement button-cremate";
+    "navigate-pokemon navigate-pokemon";
   row-gap: 1rem;
   & > :nth-child(2) {
     grid-area: main;
@@ -18,26 +18,8 @@ export const MainStyle = styled.main`
   header {
     grid-area: header;
   }
-  button:nth-last-child(2) {
-    justify-self: flex-start;
-    grid-area: button-decrement;
-  }
-  button:last-child {
-    justify-self: flex-end;
-    grid-area: button-cremate;
-  }
-  @media (max-width: 640px) {
-    grid-template-areas:
-      "header header"
-      "main main"
-      "button-decrement button-decrement"
-      "button-cremate button-cremate";
-    button:nth-last-child(2) {
-      justify-self: unset;
-    }
-    button:last-child {
-      justify-self: unset;
-    }
+  div:last-child {
+    grid-area: navigate-pokemon;
   }
   @media (max-width: 450px) {
     border-radius: unset;

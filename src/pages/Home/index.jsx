@@ -15,6 +15,7 @@ export const Home = () => {
   const countSession = sessionStorage.getItem("countSession")
     ? parseInt(sessionStorage.getItem("countSession"))
     : null
+  const listNamePokemonSession = JSON.parse(sessionStorage.getItem("listNamePokemon"))
   const namePokemonSession = JSON.parse(sessionStorage.getItem("nameSelectedOnPage"))
   const typePokemonSession = JSON.parse(sessionStorage.getItem("typeSelectedOnPage"))
   const [count, setCount] = useState(countSession || 10)
@@ -39,7 +40,10 @@ export const Home = () => {
   }
 
   const getAndSetList = async () => {
-    const list = await getListPokemonsNames()
+    const list = listNamePokemonSession
+      ? listNamePokemonSession
+      : await getListPokemonsNames()
+    sessionStorage.setItem("listNamePokemon", JSON.stringify(list))
     setListName(list)
     setLoading(false)
     return list

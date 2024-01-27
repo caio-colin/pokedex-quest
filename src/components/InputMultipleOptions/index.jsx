@@ -6,6 +6,7 @@ import { useFiltering } from "../../Hooks/index.jsx"
 import { useThemeContext } from "../../contexts/Theme/ThemeProvider.jsx"
 
 export const InputMultipleOptions = ({ setPokemonSelected }) => {
+  const listNamePokemonSession = JSON.parse(sessionStorage.getItem("listNamePokemon"))
   const [nameSelectedOnPage, setNameSelectedOnPage] = useState("")
   const [listOfPokemonNames, setListOfPokemonNames] = useState([])
   const { getListFilteredByName } = useFiltering()
@@ -30,7 +31,9 @@ export const InputMultipleOptions = ({ setPokemonSelected }) => {
 
   useEffect(() => {
     ;(async () => {
-      const list = await getListPokemonsNames()
+      const list = listNamePokemonSession
+        ? listNamePokemonSession
+        : await getListPokemonsNames()
       setListOfPokemonNames(list)
     })()
   }, [])

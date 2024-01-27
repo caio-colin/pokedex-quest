@@ -10,6 +10,13 @@ export const ButtonStyle = styled.button`
   padding: 0.5rem 1.5rem;
   border-radius: 5px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  svg {
+    fill: ${({ $theme }) => $theme.buttonDefault.textColor};
+  }
   &:active {
     transition: unset;
     background-color: ${({ $theme }) => $theme.buttonDefault.backgroundColorActive};

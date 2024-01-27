@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import { HeaderStyle, MainStyle, FooterStyle, StyleHomePage } from "./styled.jsx"
-import { ButtonDefault, PokemonDetail, InputMultipleOptions, ButtonToggleTheme } from "../../components/"
+import {
+  PokemonDetail,
+  InputMultipleOptions,
+  ButtonToggleTheme,
+  NavigatePokemon,
+} from "../../components/"
 import { HouseIcon } from "../../components/icons"
 import { getPokemons, getDecriptionsAbilities } from "../../services/requestAPI.js"
 import { useThemeContext } from "../../contexts/Theme/ThemeProvider.jsx"
@@ -46,11 +51,10 @@ export const PokemonDetails = () => {
             </StyleHomePage>
           </Link>
           <InputMultipleOptions setPokemonSelected={setPokemonSelected} />
-          <ButtonToggleTheme/>
+          <ButtonToggleTheme />
         </HeaderStyle>
         <PokemonDetail loading={loading} pokemonShow={pokemonToShow} />
-        <ButtonDefault value="previous pokemon" disabled onClick={function () {}} />
-        <ButtonDefault value="next pokemon" disabled onClick={function () {}} />
+        <NavigatePokemon setPokemonSelected={setPokemonSelected} />
       </MainStyle>
       <FooterStyle $theme={theme}>
         Pokédex &copy; 2023 - {new Date().getFullYear()}

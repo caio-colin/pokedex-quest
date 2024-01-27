@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react"
+import { createContext, useState, useContext, useEffect } from "react"
 import { themes } from "../../styles/theme"
 
 const ThemeContext = createContext()
@@ -13,10 +13,34 @@ export const useThemeContext = () => {
 
 export const ThemeProvider = ({ children }) => {
   const themeStorage = JSON.parse(localStorage.getItem("theme"))
-  const initTheme =
-    themeStorage && typeof themeStorage === "string" ? themes[themeStorage] : themes.light
+  const darkTheme = window.matchMedia("(prefers-color-scheme: dark)")
+  const homeTheme =
+    themeStorage && typeof themeStorage === "string"
+      ? themes[themeStorage]
+      : getDefaultTheme()
 
-  const [theme, setTheme] = useState(initTheme)
+  const [theme, setTheme] = useState(homeTheme)
+
+  function getDefaultTheme() {
+    if (!window.matchMedia) return themes.light
+
+    const defaultTheme = darkTheme.matches ? themes.dark : themes.light
+    return defaultTheme
+  }
+
+  const handleChangeTheme = (event) => {
+    const newTheme = event.matches ? themes.dark : themes.light
+    setTheme(newTheme)
+    localStorage.setItem("theme", JSON.stringify(newTheme.theme))
+  }
+
+  useEffect(() => {
+    if (window.matchMedia) {
+      darkTheme.addListener((event) => handleChangeTheme(event))
+    }
+
+    return () => darkTheme.removeListener(handleChangeTheme)
+  }, [])
 
   const value = [theme, setTheme]
 

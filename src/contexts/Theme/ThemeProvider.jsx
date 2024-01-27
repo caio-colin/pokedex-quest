@@ -12,7 +12,11 @@ export const useThemeContext = () => {
 }
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(themes.light)
+  const themeStorage = JSON.parse(localStorage.getItem("theme"))
+  const initTheme =
+    themeStorage && typeof themeStorage === "string" ? themes[themeStorage] : themes.light
+
+  const [theme, setTheme] = useState(initTheme)
 
   const value = [theme, setTheme]
 

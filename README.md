@@ -1,12 +1,12 @@
 # Desafio DevQuest - Pokedex SPA em React 🚀
 
 <div style="margin: 5rem 0;display: flex; gap: 2rem; justify-content: center; align-items: center; flex-wrap:wrap;">
-  <img style="width: 10rem; border-radius: 20px;" src="https://s13.gifyu.com/images/SCLDj.gif">
+  <img style="width: 10rem; border-radius: 20px;" src="./public/img/SCLDj.gif">
   <div class="container" style="position: relative;min-width: 30rem;">
-  <img src="https://i.postimg.cc/T3LPVW5N/device.png"
+  <img src="./public/img/device.png"
   style="width: 30rem;"
   alt="imagem-desktop">
-  <div style="width: 23.55rem;height: 100%;background-image: url(https://s13.gifyu.com/images/SCLD0.gif);background-repeat: no-repeat;background-size: 30rem;background-position: center center;position: absolute;top: -3px;left: 50%;transform: translateX(-50%);border-radius: 10px 10px 0 0;"></div>
+  <div style="width: 23.55rem;height: 100%;background-image: url(./public/img/SCLD0.gif);background-repeat: no-repeat;background-size: 30rem;background-position: center center;position: absolute;top: -3px;left: 50%;transform: translateX(-50%);border-radius: 10px 10px 0 0;"></div>
 </div>
 </div>
 

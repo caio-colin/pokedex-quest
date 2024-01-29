@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const MainStyle = styled.main`
-  width: 60.1rem;
+  width: 60.2rem;
   padding: 1rem;
   border: 1px solid ${({ $theme }) => $theme.container.borderColor};
   box-shadow: 0rem 0rem 0.35rem ${({ $theme }) => $theme.container.boxShadow};

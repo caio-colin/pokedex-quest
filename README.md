@@ -1,5 +1,13 @@
 # Desafio DevQuest - Pokedex SPA em React 🚀
 
+## 🌐 Acesse a Aplicação Online 🌐
+
+Este projeto está implantado no Vercel e pode ser acessado online a partir do link abaixo.
+
+https://pokedex-quest.vercel.app/
+
+## ▶️ Demonstração ▶️ 
+
 <div style="margin: auto;display: flex;">
   <img width="148" src="./public/img/demo-mobile.gif" alt="imagem-mobile">
   <img width="512" src="./public/img/demo-desktop.gif" alt="imagem-desktop">
@@ -123,7 +131,7 @@ O projeto foi desenvolvido para atender aos seguintes requisitos do teste:
 3. **Execute a Aplicação:**
 
    ```bash
-     npm start
+   npm run dev
    ```
 
 4. **Acesse no Navegador:**
@@ -136,9 +144,3 @@ Certifique-se de ter o Node.js e o npm instalados em seu sistema antes de seguir
 ---
 
 **Desenvolvido por Caio Colin - https://github.com/caio-colin**
-
-## 🌐 Acesse a Aplicação Online 🌐
-
-Este projeto está implantado no Vercel e pode ser acessado online. Clique no link abaixo para visualizar a aplicação:
-
-[Visualizar no Vercel](https://pokedex-quest.vercel.app/)

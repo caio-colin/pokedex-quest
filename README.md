@@ -1,7 +1,7 @@
 # Desafio DevQuest - Pokedex SPA em React 🚀
 
 <div style="margin: auto;display: flex;">
-  <img width="148.8" src="./public/img/demo-mobile.gif" alt="imagem-mobile">
+  <img width="148" src="./public/img/demo-mobile.gif" alt="imagem-mobile">
   <img width="512" src="./public/img/demo-desktop.gif" alt="imagem-desktop">
 </div>
 

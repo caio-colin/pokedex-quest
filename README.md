@@ -1,13 +1,8 @@
 # Desafio DevQuest - Pokedex SPA em React 🚀
 
-<div style="margin: 5rem 0;display: flex; gap: 2rem; justify-content: center; align-items: center; flex-wrap:wrap;">
-  <img style="width: 10rem; border-radius: 20px;" src="./public/img/SCLDj.gif">
-  <div class="container" style="position: relative;min-width: 30rem;">
-  <img src="./public/img/device.png"
-  style="width: 30rem;"
-  alt="imagem-desktop">
-  <div style="width: 23.55rem;height: 100%;background-image: url(./public/img/SCLD0.gif);background-repeat: no-repeat;background-size: 30rem;background-position: center center;position: absolute;top: -3px;left: 50%;transform: translateX(-50%);border-radius: 10px 10px 0 0;"></div>
-</div>
+<div style="margin: auto;display: flex;">
+  <img width="148.8" src="./public/img/demo-mobile.gif" alt="imagem-mobile">
+  <img width="512" src="./public/img/demo-desktop.gif" alt="imagem-desktop">
 </div>
 
 ## 📝Propósito da Aplicação 📝
@@ -97,10 +92,16 @@ O projeto foi desenvolvido para atender aos seguintes requisitos do teste:
 
 ## 📜 Decisões Adotadas 📜
 
+- **Origem e Autonomia no Desenvolvimento:** Todas as funcionalidades, lógicas e componentes foram desenvolvidos de forma autônoma, destacando a capacidade de criar soluções próprias e enfrentar desafios de maneira independente. Isso ressalta não apenas a implementação das features solicitadas, mas também a habilidade em tomar decisões lógicas e criativas durante o processo de construção do projeto.
+
 - **Organização do Projeto:** A estrutura do projeto foi organizada de maneira intuitiva, separando os componentes, páginas e estilos em diretórios distintos.
+
 - **Estilo e Criatividade:** O foco foi na concepção de um design cativante e acolhedor, com a aspiração de atingir a máxima intuitividade. A intenção é proporcionar uma interação fácil e natural para o usuário, elevando a experiência a um patamar mais envolvente e agradável.
+
 - **Definição Inicial do Tema:** Durante o primeiro acesso à página, o tema é automaticamente definido de acordo com as preferências do sistema do usuário. Isso assegura uma experiência inicial alinhada com as configurações globais do dispositivo, proporcionando uma entrada amigável e intuitiva ao usuário na aplicação.
+
 - **Desempenho Otimizado na Busca:** A lógica elaborada para esta funcionalidade visa proporcionar a melhor experiência possível ao usuário durante a busca por Pokémon, seja por nome, tipo ou ambos os critérios. Foi cuidadosamente projetada para evitar sobrecarregar a tela do usuário, limitando de forma consciente o resultado da busca e garantindo uma apresentação clara e relevante.
+
 - **Experiência de Retorno à Página Principal:** Aprimorando a usabilidade, a aplicação armazena a pesquisa realizada pelo usuário na página inicial. Isso garante que, ao retornar da página de detalhes, o usuário retome exatamente de onde parou, proporcionando uma experiência contínua e sem interrupções. Além disso, o último Pokémon selecionado é destacado através de uma animação no momento do retorno, adicionando um toque visual agradável e tornando a navegação mais fluida e amigável. Essas medidas foram implementadas com o objetivo de otimizar a experiência do usuário durante sua interação com a aplicação.
 
 ## 👣 Passo a Passo para Executar o Projeto Localmente 👣
